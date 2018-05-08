@@ -7,7 +7,6 @@ export default class Main extends wepy.page<{ name: string }> {
 
     constructor() {
         super()
-        getApp()
     }
 
     config = {

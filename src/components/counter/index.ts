@@ -14,4 +14,5 @@ export default class Counter extends wepy.component<{ num: number }> {
             this.num --
         },
     }
+
 }

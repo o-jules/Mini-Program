@@ -22,7 +22,7 @@ interface UploadFileOption {
     filePath: string
     name: string
     header?: { [key in string]: any }
-    formData: FormData | { [key in string]: any }
+    formData: { [key in string]: any }
     success: (res: any) => boolean
     fail: (res: any) => boolean
 }

@@ -6,11 +6,13 @@ declare module 'wepy' {
 declare const Wepy: {
     app: new () => App;
 
-    component: new <DATA>() => Component & DATA;
+    component: new <DATA>() => Component<DATA> & DATA;
 
-    mixin: new () => Mixin;
+    event: new () => WeEvent;
 
     page: new <DATA, COMPUTED = {}, METHOD = {}>() => Page<DATA> & DATA & COMPUTED & METHOD;
+
+    mixin: new () => Mixin;
 
     downloadFile: (option: { url: string }) => Promise<any>;
 
@@ -54,10 +56,8 @@ declare const Wepy: {
  * 微信小程序页面类
  * @class
  */
-declare abstract class Page<T> {
-    public config?: WxWindowConfig;
-
-    public abstract data?: T;
+declare abstract class Page<T> extends Component<T> {
+    public abstract config?: Partial<WxWindowConfig>;
 
     public $name: string;
 
@@ -68,14 +68,26 @@ declare abstract class Page<T> {
     public $invoke(name: string, type: string, config: any): Promise<any>;
 }
 
-declare class Component {
+/**
+ * 微信小程序组件类
+ * @class
+ */
+declare abstract class Component<T> {
+    public abstract data?: T;
 }
 
+/**
+ * 微信小程序应用实例
+ * @class
+ */
 declare class App {
     public use(plugin: string);
 }
 
-declare interface Mixin {
+declare class WeEvent {
+}
+
+declare class Mixin {
 }
 
 declare interface ComponentProps {
