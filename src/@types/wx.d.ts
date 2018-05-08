@@ -26,3 +26,6 @@ interface UploadFileOption {
     success: (res: any) => boolean
     fail: (res: any) => boolean
 }
+
+interface UserInfo {
+}

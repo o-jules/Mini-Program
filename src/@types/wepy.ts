@@ -6,7 +6,7 @@ declare module 'wepy' {
 declare const Wepy: {
     app: new () => App;
 
-    component: new () => Component;
+    component: new <DATA>() => Component & DATA;
 
     mixin: new () => Mixin;
 
@@ -16,7 +16,10 @@ declare const Wepy: {
 
     getFileInfo: (option: { filePath: string }) => Promise<any>;
 
-    getUserInfo: (option: { lang: string }) => Promise<any>;
+    getUserInfo: (option: {
+        lang?: string
+        success?: (res) => void
+    }) => Promise<any>;
 
     login: () => Promise<any>;
 
@@ -51,10 +54,10 @@ declare const Wepy: {
  * 微信小程序页面类
  * @class
  */
-declare class Page<T> {
-    public config: WxWindowConfig;
+declare abstract class Page<T> {
+    public config?: WxWindowConfig;
 
-    public data: T;
+    public abstract data?: T;
 
     public $name: string;
 
@@ -63,13 +66,14 @@ declare class Page<T> {
     public $apply(): void;
 
     public $invoke(name: string, type: string, config: any): Promise<any>;
-
 }
 
 declare class Component {
 }
 
-declare class App { }
+declare class App {
+    public use(plugin: string);
+}
 
 declare interface Mixin {
 }
