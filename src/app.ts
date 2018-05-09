@@ -2,16 +2,16 @@ import wepy from 'wepy'
 import 'wepy-async-function'
 
 export default class App extends wepy.app {
-    config: WxAppConfig = {
+    public config: WxAppConfig = {
         pages: [
-            'pages/main/index',
+            'pages/main/index'
         ],
         window: {
             backgroundTextStyle: 'light',
             navigationBarBackgroundColor: '#fff',
             navigationBarTitleText: 'WeChat',
-            navigationBarTextStyle: 'black',
-        },
+            navigationBarTextStyle: 'black'
+        }
     }
 
     globalData = {
@@ -23,7 +23,7 @@ export default class App extends wepy.app {
         this.use('requestfix')
     }
 
-    onLaunch = () => {
+    onLaunch() {
         this.testAsync()
     }
 
@@ -37,19 +37,19 @@ export default class App extends wepy.app {
         })
     }
 
-    testAsync = async () => {
+    async testAsync() {
         const data = await this.sleep(3)
         console.log(data)
     }
 
-    getUserInfo = (cb?: (info: UserInfo) => void): Nullable<UserInfo> | void => {
+    getUserInfo(cb?: (info: UserInfo) => void): Nullable<UserInfo> | void {
         const that = this
         if (this.globalData.userInfo) {
             return this.globalData.userInfo
         }
 
         wepy.getUserInfo({
-            success: res => {
+            success: (res) => {
                 that.globalData.userInfo = res.userInfo
                 if (cb) {
                     cb(res.userInfo)

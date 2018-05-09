@@ -91,9 +91,8 @@ declare abstract class WxComponent<T> {
  * 微信小程序应用实例
  * @class
  */
-declare class WxApp {
-
-    public config: WxAppConfig;
+declare abstract class WxApp {
+    public abstract config: WxAppConfig;
 
     public use(addon: string, ...args: Array<any>): void;
     public use<T>(addon: { new (): T; name: string }, ...args: Array<any>): void;

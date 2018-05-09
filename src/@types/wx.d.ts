@@ -35,16 +35,12 @@ declare const wx: {
     uploadFile: (option: UploadFileOption) => Promise<any>;
 }
 
-interface PhoneCallOption {
-    phoneNumber: string
-}
-
-interface SetClipboardOption {
+declare interface SetClipboardOption {
     data: any
     success: () => void
 }
 
-interface UploadFileOption {
+declare interface UploadFileOption {
     url: string
     filePath: string
     name: string

@@ -3,7 +3,7 @@
  * 微信小程序应用配置
  * @interface
  */
-interface WxAppConfig {
+declare interface WxAppConfig {
     /**
      * 设置页面路径
      * @property
@@ -35,7 +35,7 @@ interface WxAppConfig {
     debug?: boolean;
 }
 
-interface TabBarConfig {
+declare interface TabBarConfig {
     /**
      * tab 上的文字默认颜色
      * @property
