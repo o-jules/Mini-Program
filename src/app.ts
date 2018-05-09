@@ -4,7 +4,7 @@ import 'wepy-async-function'
 export default class App extends wepy.app {
     config: WxAppConfig = {
         pages: [
-            'pages/mian/index'
+            'pages/main/index',
         ],
         window: {
             backgroundTextStyle: 'light',
@@ -21,9 +21,6 @@ export default class App extends wepy.app {
     constructor() {
         super()
         this.use('requestfix')
-        wx.makePhoneCall({
-            phoneNumber: '15011920782'
-        })
     }
 
     onLaunch = () => {
@@ -45,7 +42,7 @@ export default class App extends wepy.app {
         console.log(data)
     }
 
-    getUserInfo(cb?: (info: UserInfo) => void): Nullable<UserInfo> | void {
+    getUserInfo = (cb?: (info: UserInfo) => void): Nullable<UserInfo> | void => {
         const that = this
         if (this.globalData.userInfo) {
             return this.globalData.userInfo
