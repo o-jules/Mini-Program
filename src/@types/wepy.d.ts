@@ -4,15 +4,15 @@ declare module 'wepy' {
 }
 
 declare const Wepy: {
-    app: new () => App;
+    app: new () => WxApp;
 
-    component: new <DATA>() => Component<DATA> & DATA;
+    component: new <DATA>() => WxComponent<DATA> & DATA;
 
-    event: new () => WeEvent;
+    event: new () => WxEvent;
 
-    page: new <DATA, COMPUTED = {}, METHOD = {}>() => Page<DATA> & DATA & COMPUTED & METHOD;
+    page: new <DATA, COMPUTED = {}>() => WxPage<DATA> & DATA & COMPUTED;
 
-    mixin: new () => Mixin;
+    mixin: new () => WxMixin;
 
     downloadFile: (option: { url: string }) => Promise<any>;
 
@@ -31,7 +31,7 @@ declare const Wepy: {
 
     request: (option: {
         url: string
-        success: (res: any) => void;
+        success: (res: any) => void
     }) => Promise<any>;
 
     requestPayment: (option: {
@@ -56,12 +56,14 @@ declare const Wepy: {
  * 微信小程序页面类
  * @class
  */
-declare abstract class Page<T> extends Component<T> {
+declare abstract class WxPage<T> extends WxComponent<T> {
+    /**
+     * 小程序单页的配置（主要是窗口配置），编译后生成同名的 .json 文件
+     * @member
+     */
     public abstract config?: Partial<WxWindowConfig>;
 
     public $name: string;
-
-    public $parent: any;
 
     public $apply(): void;
 
@@ -72,7 +74,16 @@ declare abstract class Page<T> extends Component<T> {
  * 微信小程序组件类
  * @class
  */
-declare abstract class Component<T> {
+declare abstract class WxComponent<T> {
+    /**
+     * 父组件的引用
+     * @member
+     */
+    public $parent: any;
+
+    /**
+     * 组件的 data
+     */
     public abstract data?: T;
 }
 
@@ -80,14 +91,17 @@ declare abstract class Component<T> {
  * 微信小程序应用实例
  * @class
  */
-declare class App {
-    public use(plugin: string);
+declare class WxApp {
+
+    public use(addon: string, ...args: Array<any>): void;
+    public use<T>(addon: { new (): T; name: string }, ...args: Array<any>): void;
+
 }
 
-declare class WeEvent {
+declare class WxEvent {
 }
 
-declare class Mixin {
+declare class WxMixin {
 }
 
 declare interface ComponentProps {

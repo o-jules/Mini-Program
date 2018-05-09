@@ -1,8 +1,6 @@
 import wepy from 'wepy'
 import 'wepy-async-function'
 
-declare const getApp: () => App;
-
 export default class App extends wepy.app {
     config = {
         pages: [
@@ -42,7 +40,7 @@ export default class App extends wepy.app {
         console.log(data)
     }
 
-    getUserInfo(cb): Nullable<UserInfo> | void {
+    getUserInfo(cb?: (info: UserInfo) => void): Nullable<UserInfo> | void {
         const that = this
         if (this.globalData.userInfo) {
             return this.globalData.userInfo

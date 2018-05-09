@@ -1,25 +1,24 @@
-<style lang="less">
-  .counter {
-    text-align: left;
-    font-size: 12px;
-  }
-  .count {
-    font-size: 18px;
-    font-weight: bold;
-    &.red {
-      color: red;
-    }
-    &.green {
-      color: green;
-    }
-  }
-</style>
-
 <template lang="jade">
   view.counter
     button(@tap="plus", size="mini") +
     button(@tap="minus", size="mini") -
-    text.count(:class="{red: num > 55, green: num < 45}") {{num}}
+    text.count(:className="countStatus") {{num}}
 </template>
 
 <script lang="typescript" src="./index.ts"></script>
+<style lang="less">
+.counter {
+  text-align: left;
+  font-size: 12px;
+}
+.count {
+  font-size: 18px;
+  font-weight: bold;
+  &.red {
+    color: red;
+  }
+  &.green {
+    color: green;
+  }
+}
+</style>

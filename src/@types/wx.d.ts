@@ -1,4 +1,3 @@
-declare function getApp(): any;
 
 declare const wx: {
     makePhoneCall: (option: PhoneCallOption) => void;
