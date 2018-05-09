@@ -3,15 +3,6 @@ import Counter from 'components/counter/index'
 
 export default class Main extends wepy.page<{ name: string }> {
 
-    constructor() {
-        super()
-
-        getApp().getUserInfo(info => {
-            // TODO:
-            // something with user info
-        })
-    }
-
     config = {
         navigationBarTitleText: ''
     }
@@ -27,4 +18,14 @@ export default class Main extends wepy.page<{ name: string }> {
     computed = {}
 
     methods = {}
+
+    constructor() {
+        super()
+
+        getApp().getUserInfo(info => {
+            // TODO:
+            // something with user info
+        })
+    }
+
 }

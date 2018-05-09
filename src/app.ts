@@ -2,7 +2,7 @@ import wepy from 'wepy'
 import 'wepy-async-function'
 
 export default class App extends wepy.app {
-    config = {
+    config: WxAppConfig = {
         pages: [
             'pages/mian/index'
         ],
@@ -10,8 +10,8 @@ export default class App extends wepy.app {
             backgroundTextStyle: 'light',
             navigationBarBackgroundColor: '#fff',
             navigationBarTitleText: 'WeChat',
-            navigationBarTextStyle: 'black'
-        }
+            navigationBarTextStyle: 'black',
+        },
     }
 
     globalData = {
@@ -21,21 +21,26 @@ export default class App extends wepy.app {
     constructor() {
         super()
         this.use('requestfix')
-    }
-
-    onLaunch() {
-        this.testAsync()
-    }
-
-    sleep(s) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve('promise resolved')
-            }, s * 1000)
+        wx.makePhoneCall({
+            phoneNumber: '15011920782'
         })
     }
 
-    async testAsync() {
+    onLaunch = () => {
+        this.testAsync()
+    }
+
+    sleep = (s: number) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(
+                () => {
+                    resolve('promise resolved')
+                },
+                s * 1000)
+        })
+    }
+
+    testAsync = async () => {
         const data = await this.sleep(3)
         console.log(data)
     }
@@ -47,9 +52,11 @@ export default class App extends wepy.app {
         }
 
         wepy.getUserInfo({
-            success(res) {
+            success: res => {
                 that.globalData.userInfo = res.userInfo
-                cb && cb(res.userInfo)
+                if (cb) {
+                    cb(res.userInfo)
+                }
             }
         })
     }

@@ -61,7 +61,7 @@ declare abstract class WxPage<T> extends WxComponent<T> {
      * 小程序单页的配置（主要是窗口配置），编译后生成同名的 .json 文件
      * @member
      */
-    public abstract config?: Partial<WxWindowConfig>;
+    public abstract config?: WxWindowConfig;
 
     public $name: string;
 
@@ -91,7 +91,9 @@ declare abstract class WxComponent<T> {
  * 微信小程序应用实例
  * @class
  */
-declare class WxApp {
+declare abstract class WxApp {
+
+    public abstract config: WxAppConfig;
 
     public use(addon: string, ...args: Array<any>): void;
     public use<T>(addon: { new (): T; name: string }, ...args: Array<any>): void;
