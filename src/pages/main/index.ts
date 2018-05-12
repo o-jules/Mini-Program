@@ -1,14 +1,18 @@
 import wepy from 'wepy'
 import Counter from 'components/counter/index'
 
-export default class Main extends wepy.page<{ name: string }> {
+interface Data {
+    name: string
+}
 
-    config = {
+export default class Main extends wepy.page<Data> {
+
+    config: WxWindowConfig = {
         navigationBarTitleText: ''
     }
 
     components = {
-        Counter
+        'counter': Counter
     }
 
     data = {

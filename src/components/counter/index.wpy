@@ -1,8 +1,9 @@
-<template lang="jade">
-  view.counter
-    button(@tap="plus", size="mini") +
-    button(@tap="minus", size="mini") -
-    text.count(:className="countStatus") {{num}}
+<template>
+    <view class="counter">
+        <button @tap="plus" size="mini"> + </button>
+        <button @tap="minus" size="mini"> - </button>
+        <text class="count" :class="countStatus"> {{num}} </text>
+    </view>
 </template>
 
 <script lang="typescript" src="./index.ts"></script>

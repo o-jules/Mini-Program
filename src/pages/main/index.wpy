@@ -1,6 +1,6 @@
 <template lang="jade">
 view.container
-    Counter
+    counter
 </template>
 
 <script lang="typescript" src="./index.ts"></script>

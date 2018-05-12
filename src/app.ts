@@ -23,7 +23,7 @@ export default class App extends wepy.app {
         this.use('requestfix')
     }
 
-    onLaunch() {
+    onLaunch = () => {
         this.testAsync()
     }
 
@@ -37,12 +37,12 @@ export default class App extends wepy.app {
         })
     }
 
-    async testAsync() {
+    testAsync = async () => {
         const data = await this.sleep(3)
         console.log(data)
     }
 
-    getUserInfo(cb?: (info: UserInfo) => void): Nullable<UserInfo> | void {
+    getUserInfo = (cb?: (info: UserInfo) => void): Nullable<UserInfo> | void => {
         const that = this
         if (this.globalData.userInfo) {
             return this.globalData.userInfo
