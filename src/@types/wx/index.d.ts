@@ -3,6 +3,7 @@ import { RequestOption, RequestTask } from './request'
 import { MakePhoneCallOption } from './phone-call'
 import { UploadFileOption, UploadTask, DownloadFileOption, DownloadTask } from './load-file'
 import { SetClipboardOption, GetClipboardOption } from './clipboard'
+import { Worker } from './worker'
 
 declare const wx: {
     /// <h1> 网络请求
@@ -57,6 +58,15 @@ declare const wx: {
      */
     setClipboardData(option: SetClipboardOption): void
 
+
+    // <h1>多线程
+
+    /**
+     * 创建一个 Worker 线程，并返回 Worker 实例，目前限制最多只能创建一个 Worker，创建下一个 Worker 前请调用 Worker.terminate。
+     * @param {string} scriptPath 为 worker 的入口文件路径，需填写绝对路径。
+     * @return {Worker}
+     */
+    createWorker(scriptPath: string): Worker
 }
 
 /**
