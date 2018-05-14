@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": "./src/",
-        "outDir": "build/dist",
+        "outDir": "dist",
         "module": "commonjs",
         "target": "es6",
         "lib": [
@@ -21,6 +21,7 @@
         "noUnusedLocals": true
     },
     "exclude": [
+        "@types",
         "node_modules",
         "build",
         "scripts",
