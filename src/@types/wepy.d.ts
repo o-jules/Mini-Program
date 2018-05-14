@@ -4,7 +4,7 @@ declare module 'wepy' {
 }
 
 declare const Wepy: {
-    app: new () => WxApp;
+    app: new (...args: Array<any>) => WxApp;
 
     component: new <DATA>() => WxComponent<DATA> & DATA;
 

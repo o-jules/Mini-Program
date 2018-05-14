@@ -1,7 +1,7 @@
 import wepy from 'wepy'
 import 'wepy-async-function'
 
-export default class App extends wepy.app {
+class AppWrap extends wepy.app {
     public config: WxAppConfig = {
         pages: [
             'pages/main/index'
@@ -18,8 +18,8 @@ export default class App extends wepy.app {
         userInfo: null
     }
 
-    constructor() {
-        super()
+    constructor(...args: Array<any>) {
+        super(args)
         this.use('requestfix')
     }
 
@@ -57,4 +57,8 @@ export default class App extends wepy.app {
             }
         })
     }
+}
+
+export default function App(...args: Array<any>) {
+    return new AppWrap(args)
 }
