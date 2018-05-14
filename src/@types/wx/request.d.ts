@@ -1,20 +1,10 @@
-/**
- * 发起网络请求
- * https://mp.weixin.qq.com/debug/wxadoc/dev/api/network-request.html
- *
- * @param {RequestOption} req
- * @return RequestTask
- */
-interface WxRequest {
-    (req: RequestOption): RequestTask
-}
 
 /**
- * wx.request
+ * wx.request 参数
  */
-interface RequestOption {
+export interface RequestOption {
     /**
-     * url
+     * 网络请求的 url
      */
     url: string
 
@@ -84,7 +74,7 @@ interface FetchResponse {
 /**
  * wx.request 返回值
  */
-interface RequestTask {
+export interface RequestTask {
 
     /**
      * 中断请求任务

@@ -1,13 +1,10 @@
 
 /**
- * 开始录音
- * @function
+ * 录音所需的参数
+ * @interface
  */
-interface StartRecord {
-    (option: StartRecordOption): void
-}
+export interface StartRecordOption {
 
-interface StartRecordOption {
     /**
      * 录音成功后调用，返回录音文件的临时文件路径，res = {tempFilePath: '录音文件的临时路径'}
      */
@@ -30,85 +27,92 @@ interface StartRecordOption {
 }
 
 /**
- * 停止录音
- * @function
- */
-interface StopRecord {
-    (): void
-}
-
-/**
  * 录音管理器
  * @interface
  */
-interface RecorderManager {
+export class RecorderManager {
     /**
      * 开始录音
      */
-    start: (option: StartOption) => void
+    start(option: StartOption): void
 
     /**
      * 暂停录音
      */
-    pause: () => void
+    pause(): void
 
     /**
      * 继续录音
      */
-    resume: () => void
+    resume(): void
 
     /**
      * 停止录音
      */
-    stop: () => void
+    stop(): void
 
     /**
      * 录音开始事件
+     * @param callback - 录音开始的回调
      */
-    onStart: () => void
+    onStart(callback: () => void): void
 
     /**
      * 录音暂停事件
+     * @param callback - 录暂停的回调
      */
-    onPause: () => void
+    onPause(callback: () => void): void
 
     /**
      * 录音停止事件，会回调文件地址
+     * @param callback - 停止录音的回调
      */
-    onStop: (callback: (res: {
-        /**
-         * 录音文件的临时路径
-         */
-        tempFilePath: string
-    }) => void) => void
+    onStop(callback: (
+        res: {
+            /**
+             * 录音文件的临时路径
+             */
+            tempFilePath: string
+        }) => void
+    ): void
 
     /**
      * 已录制完指定帧大小的文件，会回调录音分片结果数据。如果设置了 frameSize ，则会回调此事件
+     * @param callback - 录完指定帧后的回调函数
      */
-    onFrameRecorded: (callback: (res: {
-        /**
-         * 录音分片结果数据
-         */
-        frameBuffer: ArrayBuffer
+    onFrameRecorded(callback: (
+        res: {
+            /**
+             * 录音分片结果数据
+             */
+            frameBuffer: ArrayBuffer
 
-        /**
-         * 当前帧是否正常录音结束前的最后一帧
-         */
-        isLastFrame: boolean
-    }) => void) => void
+            /**
+             * 当前帧是否正常录音结束前的最后一帧
+             */
+            isLastFrame: boolean
+        }) => void
+    ): void
 
     /**
      * 录音错误事件, 会回调错误信息
+     * @param callback - 录音错误后的回调函数
      */
-    onError: (callback: (res: {
-        /**
-         * 错误信息
-         */
-        errMsg: string
-    }) => void) => void
+    onError(callback: (
+        res: {
+            /**
+             * 错误信息
+             */
+            errMsg: string
+        }) => void
+    ): void
 }
 
-interface StartOption {
+/**
+ * 开始录音的参数
+ * @interface
+ */
+export interface StartOption {
     /**
      * 指定录音的时长，单位 ms ，如果传入了合法的 duration ，在到达指定的 duration 后会自动停止录音，最大值 600000（10 分钟）,默认值 60000（1 分钟）
      */

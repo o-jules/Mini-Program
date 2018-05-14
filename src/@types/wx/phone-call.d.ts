@@ -1,13 +1,9 @@
 
 /**
- * 拨打电话
- * @function
+ * 拨打电话的参数
+ * @interface
  */
-interface MakePhoneCall {
-    (option: PhoneCallOption): void
-}
-
-interface PhoneCallOption {
+export interface MakePhoneCallOption {
     /**
      * 需要拨打的电话号码
      * @property

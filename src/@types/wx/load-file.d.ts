@@ -1,16 +1,8 @@
 
 /**
- * 上传文件
- * @function
- */
-interface UploadFile {
-    (option: UploadFileOption): UploadTask
-}
-
-/**
  * wx.uploadFile 文件上传请求对象
  */
-interface UploadFileOption {
+export interface UploadFileOption {
 
     /**
      * 开发者服务器 url
@@ -56,7 +48,7 @@ interface UploadFileOption {
 /**
  * wx.uploadFile 上传文件的返回值（其包含可使用的方法）
  */
-interface UploadTask {
+export interface UploadTask {
     /**
      * 监听上传进度变化
      * @since v1.4.0
@@ -71,17 +63,10 @@ interface UploadTask {
 }
 
 /**
- * 上传文件
- * @function
+ * 下载文件的参数
+ * @interface
  */
-interface DownloadFile {
-    (option: DownloadFileOption): DownloadTask
-}
-
-/**
- * 下载
- */
-interface DownloadFileOption {
+export interface DownloadFileOption {
 
     /**
      * 下载资源的 url
@@ -112,7 +97,7 @@ interface DownloadFileOption {
 /**
  * wx.downloadFile 下载文件的返回值（其包含可使用的方法）
  */
-interface DownloadTask {
+export interface DownloadTask {
     /**
      * 监听上传进度变化
      * @since v1.4.0
