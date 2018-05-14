@@ -10,7 +10,7 @@ declare const wx: {
      * 拨打电话
      * @function
      */
-    makePhoneCall: MakePhoneCall;
+    makePhoneCall: MakePhoneCall
 
     /**
      * 复制文字到剪贴板
@@ -29,6 +29,25 @@ declare const wx: {
      * @function
      */
     downloadFile: DownloadFile
+
+    /**
+     * 开始录音
+     * @function
+     */
+    startRecord: StartRecord
+
+    /**
+     * 停止录音
+     * @function
+     */
+    stopRecord: StopRecord
+
+    /**
+     * 获取全局唯一的录音管理器
+     * @return {RecorderManager}
+     */
+    getRecorderManager: () => RecorderManager
+
 }
 
 /**
