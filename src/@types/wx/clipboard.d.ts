@@ -2,7 +2,7 @@
 /**
  * 复制文字到剪贴板的参数
  */
-export interface SetClipboardOption {
+interface SetClipboardOption {
     data: string
 
     /**
@@ -24,7 +24,7 @@ export interface SetClipboardOption {
 /**
  * 获取系统剪贴板内容
  */
-export interface GetClipboardOption {
+interface GetClipboardOption {
     /**
      * 接口调用成功的回调函数
      */

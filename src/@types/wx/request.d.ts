@@ -2,7 +2,7 @@
 /**
  * wx.request 参数
  */
-export interface RequestOption {
+interface RequestOption {
     /**
      * 网络请求的 url
      */
@@ -74,7 +74,7 @@ interface FetchResponse {
 /**
  * wx.request 返回值
  */
-export interface RequestTask {
+interface RequestTask {
 
     /**
      * 中断请求任务

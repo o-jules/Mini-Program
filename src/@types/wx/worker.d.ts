@@ -3,7 +3,7 @@
  * Worker 对象
  * @interface
  */
-export class Worker {
+interface Worker {
     /**
      * 向 Worker 线程发送的消息。
      */

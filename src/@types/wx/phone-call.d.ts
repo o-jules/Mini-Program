@@ -3,7 +3,7 @@
  * 拨打电话的参数
  * @interface
  */
-export interface MakePhoneCallOption {
+interface MakePhoneCallOption {
     /**
      * 需要拨打的电话号码
      * @property

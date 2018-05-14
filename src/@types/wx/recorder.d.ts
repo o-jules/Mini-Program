@@ -3,7 +3,7 @@
  * 录音所需的参数
  * @interface
  */
-export interface StartRecordOption {
+interface StartRecordOption {
 
     /**
      * 录音成功后调用，返回录音文件的临时文件路径，res = {tempFilePath: '录音文件的临时路径'}
@@ -30,7 +30,7 @@ export interface StartRecordOption {
  * 录音管理器
  * @interface
  */
-export class RecorderManager {
+interface RecorderManager {
     /**
      * 开始录音
      */
@@ -112,7 +112,7 @@ export class RecorderManager {
  * 开始录音的参数
  * @interface
  */
-export interface StartOption {
+interface StartOption {
     /**
      * 指定录音的时长，单位 ms ，如果传入了合法的 duration ，在到达指定的 duration 后会自动停止录音，最大值 600000（10 分钟）,默认值 60000（1 分钟）
      */
