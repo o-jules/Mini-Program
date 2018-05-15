@@ -58,19 +58,18 @@ interface SocketTask {
         /**
          * 接口调用成功的回调函数
          */
-        success?(): void
+        success?: () => void
 
         /**
          * 接口调用失败的回调函数
          */
-        fail?(): void
+        fail?: () => void
 
         /**
          * 接口调用结束的回调函数（调用成功、失败都会执行）
          */
-        complete?(): void
+        complete?: () => void
     }): void
-
 
     /**
      * 关闭 WebSocket 连接。
@@ -92,17 +91,17 @@ interface SocketTask {
         /**
          * 接口调用成功的回调函数
          */
-        success?(): void
+        success?: () => void
 
         /**
          * 接口调用失败的回调函数
          */
-        fail?(): void
+        fail?: () => void
 
         /**
          * 接口调用结束的回调函数（调用成功、失败都会执行）
          */
-        complete?(): void
+        complete?: () => void
     }): void
 
     /**
@@ -118,10 +117,16 @@ interface SocketTask {
     }) => void)
 
     /**
+     * 监听 WebSocket 连接关闭事件。
+     * @param callback - socket关闭事件的回调
+     */
+    onClose(callback: () => void): void
+
+    /**
      * 监听 WebSocket 错误。
      * @param callback - 响应错误事件的回调
      */
-    onClose(
+    onError(
         /**
          * @param errMsg - 错误信息
          */

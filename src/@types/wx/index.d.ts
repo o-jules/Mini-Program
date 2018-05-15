@@ -34,6 +34,37 @@ interface Network {
      * @return {SocketTask}
      */
     connectSocket(option: ConnectSocketOption): SocketTask
+
+    /**
+     * 监听WebSocket连接打开事件。
+     * @deprecated
+     */
+    onSocketOpen: SocketTask["onOpen"]
+
+    /**
+     * 监听WebSocket错误。
+     * @deprecated
+     */
+    onSocketError: SocketTask["onError"]
+
+    /**
+     * 通过 WebSocket 连接发送数据，需要先 wx.connectSocket，并在 wx.onSocketOpen 回调之后才能发送。
+     * @deprecated
+     */
+    sendSocketMessage: SocketTask["send"]
+
+    /**
+     * 监听WebSocket接受到服务器的消息事件。
+     * @deprecated
+     */
+    onSocketMessage: SocketTask["onMessage"]
+
+    /**
+     * 关闭 WebSocket 连接。
+     * @deprecated
+     */
+    closeSocket: SocketTask["close"]
+
 }
 
 /// <h1>录音管理
