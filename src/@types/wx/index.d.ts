@@ -26,7 +26,14 @@ interface Network {
      * @param {DownloadFileOption} option - 下载文件所需的参数
      * @return {DownloadTask}
      */
-    downloadFile: (option: DownloadFileOption) => DownloadTask
+    downloadFile(option: DownloadFileOption): DownloadTask
+
+    /**
+     * 创建一个 WebSocket 连接。
+     * @param {ConnectSocketOption} option - 创建 WebSocket 所需要的参数
+     * @return {SocketTask}
+     */
+    connectSocket(option: ConnectSocketOption): SocketTask
 }
 
 /// <h1>录音管理
