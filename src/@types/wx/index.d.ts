@@ -65,6 +65,7 @@ interface Network {
      */
     closeSocket: SocketTask["close"]
 
+    chooseImage: (option: ChooseImageOption) => void
 }
 
 /// <h1>录音管理
