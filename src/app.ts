@@ -1,7 +1,11 @@
 import wepy from 'wepy'
 import 'wepy-async-function'
 
-class AppWrap extends wepy.app {
+/**
+ * 自定义的 App class
+ * @class
+ */
+class AppClass extends wepy.app {
     public config: WxAppConfig = {
         pages: [
             'pages/main/index'
@@ -59,6 +63,9 @@ class AppWrap extends wepy.app {
     }
 }
 
-export default function App(...args: Array<any>) {
-    return new AppWrap(args)
+/**
+ * You need to do this to escape the faults of the toolchain
+ */
+export default function AppMain(...args: Array<any>) {
+    return new AppClass(args)
 }
