@@ -1,6 +1,7 @@
 
 declare const wx: (
-    Network & Recorder & PhoneCall & Clipboard & Worker
+    Network & Recorder & PhoneCall & Clipboard &
+    FileOperation & Worker & Update
 )
 
 /// <h1> 网络请求
@@ -105,6 +106,46 @@ interface Clipboard {
     setClipboardData(option: SetClipboardOption): void
 }
 
+/// <h1>文件操作
+interface FileOperation {
+    /**
+     * 保存文件到本地。注意：saveFile 会把临时文件移动，因此调用成功后传入的 tempFilePath 将不可用
+     * @param {SaveFileOption} option
+     */
+    saveFile(option: SaveFileOption): void
+
+    /**
+     * 获取文件信息
+     * @since v1.4.0
+     * @param option
+     */
+    getFileInfo(option: GetFileInfoOption): void
+
+    /**
+     * 获取本地已保存的文件列表
+     * @param option
+     */
+    getSavedFileList(option: GetSavedFileListOption): void
+
+    /**
+     * 获取本地文件的文件信息。此接口只能用于获取已保存到本地的文件，若需要获取临时文件信息，请使用 wx.getFileInfo 接口。
+     * @param option
+     */
+    getSavedFileInfo(option: GetSavedFileInfoOption): void
+
+    /**
+     * 删除本地存储的文件
+     * @param option
+     */
+    removeSavedFile(option: RemoveSavedFileOption): void
+
+    /**
+     * 新开页面打开文档，支持格式：doc, xls, ppt, pdf, docx, xlsx, pptx
+     * @param option
+     */
+    openDocument(option: OpenDocumentOption): void
+}
+
 // <h1>多线程
 interface Worker {
     /**
@@ -113,4 +154,13 @@ interface Worker {
      * @return {Worker}
      */
     createWorker(scriptPath: string): Worker
+}
+
+// <h1>更新管理
+interface Update {
+    /**
+     * 获取全局唯一的版本更新管理器，用于管理小程序更新。
+     * @since v1.9.90
+     */
+    getUpdateManager(): UpdateManager
 }
