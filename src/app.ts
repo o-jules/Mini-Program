@@ -8,13 +8,13 @@ import 'wepy-async-function'
 class AppClass extends wepy.app {
     public config: WxAppConfig = {
         pages: [
-            'pages/main/index'
+            'pages/main/index',
         ],
         window: {
             backgroundTextStyle: 'light',
             navigationBarBackgroundColor: '#fff',
             navigationBarTitleText: 'WeChat',
-            navigationBarTextStyle: 'black'
+            navigationBarTextStyle: 'black',
         }
     }
 

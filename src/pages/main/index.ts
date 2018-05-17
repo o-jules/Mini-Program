@@ -8,11 +8,11 @@ interface Data {
 export default class Main extends wepy.page<Data> {
 
     config: WxWindowConfig = {
-        navigationBarTitleText: ''
+        navigationBarTitleText: '',
     }
 
     components = {
-        'counter': Counter
+        'counter': Counter,
     }
 
     data = {

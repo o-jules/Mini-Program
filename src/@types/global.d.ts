@@ -1,4 +1,4 @@
 // types
 
-type Optional<T> = T | undefined
-type Nullable<T> = T | null
+declare type Optional<T> = T | undefined
+declare type Nullable<T> = T | null
