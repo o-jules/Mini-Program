@@ -1,7 +1,7 @@
 
 declare const wx: (
     Network & Recorder & PhoneCall & Clipboard &
-    FileOperation & Worker & Update
+    FileOperation & Storage & Worker & Update
 )
 
 /// <h1> 网络请求
@@ -144,6 +144,77 @@ interface FileOperation {
      * @param option
      */
     openDocument(option: OpenDocumentOption): void
+}
+
+/// <h1>缓存
+/**
+ * 每个微信小程序都可以有自己的本地缓存，可以通过 wx.setStorage（wx.setStorageSync）、wx.getStorage（wx.getStorageSync）、
+ * wx.clearStorage（wx.clearStorageSync）可以对本地缓存进行设置、获取和清理。
+ * 同一个微信用户，同一个小程序 storage 上限为 10MB。localStorage 以用户维度隔离，同一台设备上，A 用户无法读取到 B 用户的数据。
+ *
+ * 注意： 如果用户储存空间不足，我们会清空最近最久未使用的小程序的本地缓存。我们不建议将关键信息全部存在 localStorage，以防储存空间不足或用户换设备的情况。
+ */
+interface Storage {
+    /**
+     * 将数据存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个异步接口。
+     * @param option
+     */
+    setStorage(option: SetStorageOption): void
+
+    /**
+     * 将 data 存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个同步接口。
+     * 如果错误，会抛出异常
+     * @param key
+     * @param data
+     */
+    setStorageSync(key: string, data: string|object): void
+
+    /**
+     * 从本地缓存中异步获取指定 key 对应的内容。
+     * @param option
+     */
+    getStorage(option: GetStorageOption): void
+
+    /**
+     * 从本地缓存中同步获取指定 key 对应的内容。
+     * 如果出错，则抛出异常
+     * @param key - 本地缓存中的指定的 key
+     */
+    getStorageSync(key: string): string
+
+    /**
+     * 异步获取当前storage的相关信息
+     * @param option
+     */
+    getStorageInfo(option: GetStorageInfoOption): void
+
+    /**
+     * 同步获取当前storage的相关信息。
+     * 如果失败则抛出异常。
+     */
+    getStorageInfoSync(): StorageInfo
+
+    /**
+     * 从本地缓存中异步移除指定 key。
+     * @param option
+     */
+    removeStorage(option: RemoveStorageOption): void
+
+    /**
+     * 从本地缓存中同步移除指定 key 。
+     * @param key - 本地缓存中的指定的 key
+     */
+    removeStorageSync(key: string): void
+
+    /**
+     * 清理本地数据缓存。
+     */
+    clearStorage(): void
+
+    /**
+     * 同步清理本地数据缓存
+     */
+    clearStorageSync(): void
 }
 
 // <h1>多线程
