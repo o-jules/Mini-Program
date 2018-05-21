@@ -1,0 +1,11 @@
+{
+    "author": {
+        "name": "o-jules",
+        "email": "jules3in@gmail.com"
+    },
+    "name": "@types/wx",
+    "deprecated": false,
+    "description": "微信小程序开放 API 的 Typescript 类型声明",
+    "types": "index.d.ts",
+    "version": "0.0.1"
+}
