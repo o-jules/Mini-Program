@@ -139,6 +139,9 @@ export interface GetImageInfoOption {
     complete?: () => void;
 }
 
+/**
+ * 保存图片的参数
+ */
 export interface SaveImageOption {
     /**
      * 图片文件路径，可以是临时文件路径也可以是永久文件路径，不支持网络图片路径

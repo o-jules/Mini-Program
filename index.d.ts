@@ -8,7 +8,7 @@ import { SaveFileOption, GetFileInfoOption, GetSavedFileListOption, GetSavedFile
 import { SetStorageOption, GetStorageOption, GetStorageInfoOption, StorageInfo, RemoveStorageOption } from './storage';
 import { SocketWorker } from './worker';
 import { UpdateManager } from './update-manager';
-import { ChooseImageOption } from './images';
+import { ChooseImageOption, PreviewImageOption, GetImageInfoOption, SaveImageOption } from './images';
 
 declare global {
     /**
@@ -23,7 +23,9 @@ declare global {
 
 }
 
-/// <h1> 网络请求
+/**
+ * 网络请求
+ */
 interface Network {
 
     /**
@@ -86,11 +88,35 @@ interface Network {
     closeSocket: SocketTask["close"];
 }
 
+/**
+ * 图片管理
+ */
 interface ImageOperation {
-    chooseImage: (option: ChooseImageOption) => void;
+    /**
+     * 从本地相册选择图片或使用相机拍照。
+     */
+    chooseImage(option: ChooseImageOption): void;
+
+    /**
+     * 预览图片。
+     */
+    previewImage(option: PreviewImageOption): void;
+
+    /**
+     * 获取图片信息
+     */
+    getImageInfo(option: GetImageInfoOption): void;
+
+    /**
+     * 保存图片到系统相册。需要用户授权 scope.writePhotosAlbum
+     * @since v1.2.0
+     */
+    saveImageToPhotosAlbum(option: SaveImageOption): void;
 }
 
-/// <h1>录音管理
+/**
+ * 录音管理
+ */
 interface Recorder {
     /**
      * 开始录音
@@ -110,7 +136,9 @@ interface Recorder {
     getRecorderManager(): RecorderManager;
 }
 
-/// <h1>电话
+/**
+ * 电话
+ */
 interface PhoneCall {
     /**
      * 拨打电话
@@ -119,7 +147,9 @@ interface PhoneCall {
 }
 
 
-/// <h1>剪贴板
+/**
+ * 剪贴板
+ */
 interface Clipboard {
     /**
      * 复制文字到剪贴板
@@ -132,7 +162,9 @@ interface Clipboard {
     getClipboardData(option: GetClipboardOption): void;
 }
 
-/// <h1>文件操作
+/**
+ * 文件操作
+ */
 interface FileOperation {
     /**
      * 保存文件到本地。注意：saveFile 会把临时文件移动，因此调用成功后传入的 tempFilePath 将不可用
@@ -172,8 +204,9 @@ interface FileOperation {
     openDocument(option: OpenDocumentOption): void;
 }
 
-/// <h1>缓存
 /**
+ * 缓存
+ * 
  * 每个微信小程序都可以有自己的本地缓存，可以通过 wx.setStorage（wx.setStorageSync）、wx.getStorage（wx.getStorageSync）、
  * wx.clearStorage（wx.clearStorageSync）可以对本地缓存进行设置、获取和清理。
  * 同一个微信用户，同一个小程序 storage 上限为 10MB。localStorage 以用户维度隔离，同一台设备上，A 用户无法读取到 B 用户的数据。
@@ -246,7 +279,9 @@ interface Storage {
     clearStorageSync(): void;
 }
 
-// <h1>多线程
+/**
+ * 多线程
+ */
 interface Worker {
     /**
      * 创建一个 Worker 线程，并返回 Worker 实例，目前限制最多只能创建一个 Worker，创建下一个 Worker 前请调用 Worker.terminate。
@@ -256,7 +291,9 @@ interface Worker {
     createWorker(scriptPath: string): SocketWorker;
 }
 
-// <h1>更新管理
+/**
+ * 更新管理
+ */
 interface Update {
     /**
      * 获取全局唯一的版本更新管理器，用于管理小程序更新。
