@@ -10,10 +10,18 @@ import { SocketWorker } from './worker';
 import { UpdateManager } from './update-manager';
 import { ChooseImageOption } from './images';
 
-declare const wx: (
-    Network & ImageOperation & Recorder & PhoneCall & Clipboard &
-    FileOperation & Storage & Worker & Update
-);
+declare global {
+    /**
+     * 全局的 wx 对象
+     * @constant
+     * @global
+     */
+    var wx: (
+        Network & ImageOperation & Recorder & PhoneCall & Clipboard &
+        FileOperation & Storage & Worker & Update
+    );
+
+}
 
 /// <h1> 网络请求
 interface Network {
