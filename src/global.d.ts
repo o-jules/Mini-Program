@@ -1,8 +1,8 @@
-declare function getApp(): App;
+declare function getApp(): MainApp;
 
 interface UserInfo {}
 
-declare class App {
+declare class MainApp {
 
     globalData: {
         userInfo: UserInfo

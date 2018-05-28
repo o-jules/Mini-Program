@@ -19,6 +19,7 @@
     },
     "devDependencies": {
         "@types/wx": "https://github.com/o-jules/wx-types",
+        "@types/wepy": "https://github.com/o-jules/wepy-types",
         "babel-eslint": "^7.2.1",
         "babel-plugin-transform-class-properties": "^6.24.1",
         "babel-plugin-transform-decorators-legacy": "^1.3.4",
