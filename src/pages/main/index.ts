@@ -1,5 +1,6 @@
 import wepy from 'wepy'
 import Counter from 'components/counter/index'
+import { WxWindowConfig } from 'wepy/config';
 
 interface Data {
     name: string

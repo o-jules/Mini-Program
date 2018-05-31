@@ -1,5 +1,6 @@
 import wepy from 'wepy'
 import 'wepy-async-function'
+import { WxAppConfig } from 'wepy/config';
 
 /**
  * 自定义的 App class
