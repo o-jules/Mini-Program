@@ -1,4 +1,5 @@
 import Component from "./component";
+import { WxWindowConfig } from './config';
 
 /**
  * 微信小程序页面类

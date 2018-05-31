@@ -1,4 +1,5 @@
 import Page from "./page";
+import { WxAppConfig } from './config';
 
 /**
  * 微信小程序应用实例
