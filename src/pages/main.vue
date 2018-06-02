@@ -1,19 +1,24 @@
+<template lang="jade">
+view.container
+  counter
+</template>
+
+<script lang="typescript">
 import wepy from 'wepy'
-import Counter from 'components/counter/index'
-import { WxWindowConfig } from 'wepy/config';
+import { WxWindowConfig } from 'wepy/config'
+import Counter from 'components/counter.vue'
 
 interface Data {
     name: string
 }
 
 export default class Main extends wepy.page<Data> {
-
     config: WxWindowConfig = {
         navigationBarTitleText: '',
     }
 
     components = {
-        'counter': Counter,
+        'counter': Counter
     }
 
     data = {
@@ -27,5 +32,5 @@ export default class Main extends wepy.page<Data> {
     constructor() {
         super()
     }
-
 }
+</script>

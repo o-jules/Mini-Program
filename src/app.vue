@@ -1,6 +1,7 @@
+<script lang="typescript">
 import wepy from 'wepy'
+import { WxAppConfig } from 'wepy/config'
 import 'wepy-async-function'
-import { WxAppConfig } from 'wepy/config';
 
 /**
  * 自定义的 App class
@@ -9,7 +10,7 @@ import { WxAppConfig } from 'wepy/config';
 class AppClass extends wepy.app {
     public config: WxAppConfig = {
         pages: [
-            'pages/main/index',
+            'pages/main',
         ],
         window: {
             backgroundTextStyle: 'light',
@@ -70,3 +71,4 @@ class AppClass extends wepy.app {
 export default function AppMain(...args: Array<any>) {
     return new AppClass(args)
 }
+</script>

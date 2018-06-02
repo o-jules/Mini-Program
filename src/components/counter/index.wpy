@@ -1,3 +1,0 @@
-<template src="./index.xml" />
-<script lang="typescript" src="./index.ts" />
-<style lang="less" src="./index.less" />

@@ -3,7 +3,7 @@ const tsConfig = require('./tsconfig.json');
 var prod = process.env.NODE_ENV === 'production';
 
 module.exports = {
-    wpyExt: '.wpy',
+    wpyExt: '.vue',
     eslint: false,
     cliLogs: !prod,
     build: {
@@ -16,9 +16,9 @@ module.exports = {
     resolve: {
         alias: {
             '@': path.join(__dirname, 'src'),
-            'components': path.join(__dirname, 'src/components'),
             'mixins': path.join(__dirname, 'src/mixins'),
             'pages': path.join(__dirname, 'src/pages'),
+            'components': path.join(__dirname, 'src/components'),
         },
         aliasFields: ['wepy', 'weapp'],
         modules: ['node_modules']
