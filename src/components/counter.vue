@@ -2,19 +2,33 @@
 <view class="counter">
     <button @tap="plus" size="mini"> + </button>
     <button @tap="minus" size="mini"> - </button>
-    <text class="count" :class="{ red: num > 55, green: num < 45 }"> {{num}} </text>
+    <text class="count" :class="{ red: isTooLarge, green: num < 45 }"> {{num}} </text>
 </view>
 </template>
 
 <script lang="typescript">
 import wepy from 'wepy'
 
-export default class Counter extends wepy.component<{ num: number }> {
-    data = {
+interface Data {
+    num: number
+}
+
+interface Computed {
+    isTooLarge: boolean
+}
+
+export default class Counter extends wepy.component<{}, Data, Computed> {
+    data: Data = {
         num: 50,
     }
 
     computed = {
+        isTooLarge: () => {
+            if (this.num > 55) {
+                return true
+            }
+            return false
+        }
     }
 
     methods = {
