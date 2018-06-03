@@ -10,7 +10,8 @@ declare const wepy: {
 
     app: new (...args: Array<any>) => App;
 
-    component: new <DATA = {}, COMPUTED = {}>() => Component<DATA, COMPUTED> & DATA;
+    component: new <PROPS = {}, DATA = {}, COMPUTED = {}>() =>
+        Component<PROPS, DATA, COMPUTED> & Readonly<PROPS> & DATA & Readonly<COMPUTED>;
 
     event: new () => Event;
 

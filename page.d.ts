@@ -5,12 +5,11 @@ import { WxWindowConfig } from './config';
  * 微信小程序页面类
  * @class
  */
-export default abstract class Page<DATA = {}, COMPUTED = {}> extends Component<DATA, COMPUTED> {
+export default class Page<DATA = {}, COMPUTED = {}> extends Component<void, DATA, COMPUTED> {
     /**
      * 小程序单页的配置（主要是窗口配置），编译后生成同名的 .json 文件
-     * @member
      */
-    public abstract config?: WxWindowConfig;
+    public readonly config?: WxWindowConfig;
 
     /**
      * 页面装载的生命周期勾子

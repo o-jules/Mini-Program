@@ -5,19 +5,30 @@ import { WxAppConfig } from './config';
  * 微信小程序应用实例
  * @class
  */
-export default abstract class App {
-    public abstract config: WxAppConfig;
+export default class App {
+    public readonly config: WxAppConfig;
 
-    public use(addon: string, ...args: Array<any>): void;
-    public use<T>(addon: { new (): T; name: string }, ...args: Array<any>): void;
+    public readonly $wxapp: any;
 
-    public $wxapp: any;
-
-    public $pages: {
+    public readonly $pages: {
         [key: string]: Page<any>;
     }
 
-    public $interceptors: {
+    public readonly $interceptors: {
         [key: string]: any;
     }
+
+    /**
+     * 使用插件
+     * @param addon - 插件名
+     * @param args - 传递给插件的参数
+     */
+    public use(addon: string, ...args: Array<any>): void;
+
+    /**
+     * 使用插件
+     * @param addon - 插件类对象
+     * @param args - 传递给插件的参数
+     */
+    public use<T>(addon: { new (): T; name: string }, ...args: Array<any>): void;
 }
