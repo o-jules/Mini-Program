@@ -12,25 +12,59 @@ export default class Page<DATA = {}, COMPUTED = {}> extends Component<void, DATA
     public readonly config?: WxWindowConfig;
 
     /**
-     * 页面装载的生命周期勾子
+     * 监听页面加载（生命周期函数）
      * @param option
      */
     public onLoad(option: PageOnLoadOption);
 
     /**
-     * 页面挂载的生命周期勾子
+     * 监听页面初次渲染完成（生命周期函数）
      */
-    public onUnload();
+    public onReady();
 
     /**
-     * 页面显示的生命周期勾子
+     * 监听页面显示（生命周期函数）
      */
     public onShow();
 
     /**
-     * 页面隐藏的生命周期勾子
+     * 监听页面隐藏（生命周期函数）
      */
     public onHide();
+
+    /**
+     * 监听页面卸载（生命周期函数）
+     */
+    public onUnload();
+
+    /**
+     * 监听用户下拉动作（页面相关事件处理函数）
+     */
+    public onPullDownRefresh();
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    public onReachBottom();
+
+    /**
+     * 用户点击右上角转发
+     */
+    public onShareAppMessage();
+
+    /**
+     * 页面滚动触发事件的处理函数
+     */
+    public onPageScroll();
+
+    /**
+     * 当前是 tab 页时，点击 tab 时触发
+     */
+    public onTabItemTap(item: {
+        index: number
+        pagePath: string
+        text: string
+    });
 }
 
 export interface PageOnLoadOption {}
