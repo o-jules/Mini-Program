@@ -126,7 +126,7 @@ declare namespace wxml {
          * 是否显示面板指示点。
          * 默认值：false
          */
-        indicatorDots: boolean;
+        indicatorDots?: boolean;
 
         /**
          * 指示点颜色。
@@ -134,7 +134,7 @@ declare namespace wxml {
          *
          * @since 1.1.0
          */
-        indicatorColor: string;
+        indicatorColor?: string;
 
         /**
          * 当前选中的指示点颜色。
@@ -142,78 +142,78 @@ declare namespace wxml {
          *
          * @since 1.1.0
          */
-        indicatorActiveColor: string;
+        indicatorActiveColor?: string;
 
         /**
          * 是否自动切换。
          * 默认值：false
          */
-        autoplay: boolean;
+        autoplay?: boolean;
 
         /**
          * 当前所在滑块的 index。
          * 默认值：0
          */
-        current: number;
+        current?: number;
 
         /**
          * 当前所在滑块的 item-id ，不能与 current 被同时指定。
          * 默认值：	""
          * @since 1.9.0
          */
-        currentItemId: string;
-    
+        currentItemId?: string;
+
         /**
          * 自动切换时间间隔。
          * 默认值：5000
          */
-        interval: number;
+        interval?: number;
 
         /**
          * 滑动动画时长。
          * 默认值：500
          */
-        duration: number;
+        duration?: number;
 
         /**
          * 是否采用衔接滑动。
          * 默认值：false。
          */
-        circular: boolean;
+        circular?: boolean;
 
         /**
          * 滑动方向是否为纵向。
          * 默认值：false。
          */
-        vertical: boolean;
-    
+        vertical?: boolean;
+
         /**
          * 前边距，可用于露出前一项的一小部分，接受 px 和 rpx 值。
          * 默认值："0px"。
          * @since 1.9.0
          */
-        previousMargin: string;
-    
+        previousMargin?: string;
+
         /**
          * 后边距，可用于露出后一项的一小部分，接受 px 和 rpx 值。
          * 默认值："0px"
          * @since 1.9.0
          */
-        nextMargin: string;
-    
+        nextMargin?: string;
+
         /**
          * 同时显示的滑块数量
          * 默认值：1
          * @since 1.9.0
          */
-        displayMultipleItems: number;
+        displayMultipleItems?: number;
 
         /**
          * 是否跳过未显示的滑块布局，设为 true 可优化复杂情况下的滑动性能，但会丢失隐藏状态滑块的布局信息。
          * 默认值：false
          * @since 1.9.0
          */
-        skipHiddenItemLayout: boolean;
+        skipHiddenItemLayout?: boolean;
 
         /**
          * current 改变时会触发 change 事件，event.detail = {current: current, source: source}。
@@ -222,7 +222,7 @@ declare namespace wxml {
          *   - touch 用户划动引起swiper变化；
          *   - 其他原因将用空字符串表示。
          */
-        bindchange: EventHandle;
+        bindchange?: EventHandle;
 
         /**
          * 动画结束时会触发 animationfinish 事件，event.detail 同上。
@@ -240,8 +240,124 @@ declare namespace wxml {
          * 默认值：""
          * @since 1.9.0
          */
-        itemId: string;
+        itemId?: string;
     }
+
+    /**
+     * 可移动的视图容器，在页面中可以拖拽滑动。
+     * 基础库 1.2.0 开始支持，低版本需做兼容处理。
+     * @since 1.2.0
+     */
+    interface MovableViewElement extends Element {
+        /**
+         * movable-view的移动方向，属性值有all、vertical、horizontal、none。
+         * 默认值：none
+         */
+        direction?: string;
+        /**
+         * movable-view是否带有惯性。
+         * 默认值：false
+         */
+        inertia?: boolean;
+        /**
+         * 超过可移动区域后，movable-view是否还可以移动。
+         * 默认值：false
+         */
+        outOfBounds?: boolean;
+
+        /**
+         * 定义x轴方向的偏移，如果x的值不在可移动范围内，会自动移动到可移动范围；改变x的值会触发动画。
+         */
+        x?: number | string;
+
+        /**
+         * 定义y轴方向的偏移，如果y的值不在可移动范围内，会自动移动到可移动范围；改变y的值会触发动画。
+         */
+        y?: number | string;
+
+        /**
+         * 阻尼系数，用于控制x或y改变时的动画和过界回弹的动画，值越大移动越快。
+         * 默认值：20
+         */
+        damping?: number;
+    
+        /**
+         * 摩擦系数，用于控制惯性滑动的动画，值越大摩擦力越大，滑动越快停止；必须大于0，否则会被设置成默认值。
+         * 默认值：2
+         */
+        friction?: number;
+    
+        /**
+         * 是否禁用。
+         * 默认值：false
+         * @since 1.9.90
+         */
+        disabled?: boolean;
+    
+        /**
+         * 是否支持双指缩放，默认缩放手势生效区域是在movable-view内。
+         * 默认值：false
+         * @since 1.9.90
+         */
+        scale?: boolean;
+
+        /**
+         * 定义缩放倍数最小值。
+         * 默认值：0.5
+         * @since 1.9.90
+         */
+        scaleMin?: number;
+
+        /**
+         * 定义缩放倍数最大值。
+         * 默认值：10
+         * @since 1.9.90
+         */
+        scaleMax?: number;
+
+        /**
+         * 定义缩放倍数，取值范围为 0.5 - 10。
+         * 默认值：1
+         * @since 1.9.90
+         */
+        scaleValue?: number;
+
+        /**
+         * 是否使用动画。
+         * 默认值：true
+         * @since 2.1.0
+         */
+        animation?: boolean;
+
+        /**
+         * 拖动过程中触发的事件，event.detail = {x: x, y: y, source: source}，其中source表示产生移动的原因，值可为touch（拖动）、touch-out-of-bounds（超出移动范围）、out-of-bounds（超出移动范围后的回弹）、friction（惯性）和空字符串（setData）。
+         * @since 1.9.90
+         */
+        bindchange?: EventHandle;
+
+        /**
+         * 缩放过程中触发的事件，event.detail = {x: x, y: y, scale: scale}，其中x和y字段在2.1.0之后开始支持返回。
+         * @since 1.9.90
+         */
+        bindscale?: EventHandle;
+    }
+
+    /**
+     * movable-view 的可移动区域。
+     * 基础库 1.2.0 开始支持，低版本需做兼容处理。
+     * 注意：movable-area 必须设置width和height属性，不设置默认为10px。
+     * @since 1.2.0
+     */
+    interface MovableAreaElement extends Element {
+        /**
+         * 当里面的movable-view设置为支持双指缩放时，设置此值可将缩放手势生效区域修改为整个movable-area。
+         * 默认值：false
+         * @since 1.9.90
+         */
+        scaleArea: boolean;
+    }
+
+    interface CoverViewElement extends Element {}
 
     /**
      * 文本。
@@ -260,8 +376,7 @@ declare namespace wxml {
          * 各个操作系统的空格标准并不一致。
          * @since 1.4.0
          */
-        space?: /** 中文字符空格一半大小 */
-
+        space /** 中文字符空格一半大小 */?:
             | "ensp"
             /** 中文字符空格大小 */
             | "emsp"
@@ -346,6 +461,10 @@ declare global {
             swiper: wxml.SwiperElement;
 
             "swiper-item": wxml.SwiperItemElement;
+
+            "movable-view": wxml.MovableViewElement;
+
+            "movable-area": wxml.MovableAreaElement;
 
             text: wxml.TextElement;
 
