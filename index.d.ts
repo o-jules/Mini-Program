@@ -280,20 +280,20 @@ declare namespace wxml {
          * 默认值：20
          */
         damping?: number;
-    
+
         /**
          * 摩擦系数，用于控制惯性滑动的动画，值越大摩擦力越大，滑动越快停止；必须大于0，否则会被设置成默认值。
          * 默认值：2
          */
         friction?: number;
-    
+
         /**
          * 是否禁用。
          * 默认值：false
          * @since 1.9.90
          */
         disabled?: boolean;
-    
+
         /**
          * 是否支持双指缩放，默认缩放手势生效区域是在movable-view内。
          * 默认值：false
@@ -357,7 +357,54 @@ declare namespace wxml {
         scaleArea: boolean;
     }
 
-    interface CoverViewElement extends Element {}
+    /**
+     * 覆盖在原生组件之上的文本视图，可覆盖的原生组件包括map、video、canvas、camera、live-player、live-pusher，只支持嵌套cover-view、cover-image，可在cover-view中使用button。
+     * 基础库 1.4.0 开始支持，低版本需做兼容处理。
+     * 
+     * - tip: 基础库 2.2.4 起支持 touch 相关事件，也可使用 hover-class 设置点击态
+     * - tip: 基础库 2.1.0 起支持设置 scale rotate 的 css 样式，包括 transition 动画
+     * - tip: 基础库 1.9.90 起 cover-view 支持 overflow: scroll，但不支持动态更新 overflow
+     * - tip: 基础库 1.9.90 起最外层 cover-view 支持 position: fixed
+     * - tip: 基础库 1.9.0 起支持插在 view 等标签下。在此之前只可嵌套在原生组件map、video、canvas、camera内，避免嵌套在其他组件内。
+     * - tip: 基础库 1.6.0 起支持css transition动画，transition-property只支持transform (translateX, translateY)与opacity。
+     * - tip: 基础库 1.6.0 起支持css opacity。
+     * - tip: 事件模型遵循冒泡模型，但不会冒泡到原生组件。
+     * - tip: 文本建议都套上cover-view标签，避免排版错误。
+     * - tip: 只支持基本的定位、布局、文本样式。不支持设置单边的border、background-image、shadow、overflow: visible等。
+     * - tip: 建议子节点不要溢出父节点
+     * - tip: 默认设置的样式有：white-space: nowrap; line-height: 1.2; display: block;
+     * - bug: 自定义组件嵌套 cover-view 时，自定义组件的 slot 及其父节点暂不支持通过 wx:if 控制显隐，否则会导致 cover-view 不显示
+     */
+    interface CoverViewElement extends Element {
+        /**
+         * 设置顶部滚动偏移量，仅在设置了 overflow-y: scroll 成为滚动元素后生效
+         * @since 2.1.0
+         */
+        scrollTop: number;
+    }
+
+    /**
+     * 覆盖在原生组件之上的图片视图，可覆盖的原生组件同cover-view，支持嵌套在cover-view里。
+     * 基础库 1.4.0 开始支持，低版本需做兼容处理。
+     */
+    interface CoverImageElement extends Element {
+        /**
+         * 图标路径，支持临时路径、网络地址（1.6.0起支持）、云文件ID（2.2.3起支持）。暂不支持base64格式。
+         */
+        src: string;
+    
+        /**
+         * 图片加载成功时触发
+         * @since 2.1.0
+         */
+        bindload: EventHandle;
+    
+        /**
+         * 图片加载失败时触发
+         * @since 2.1.0
+         */
+        binderror: EventHandle;
+    }
 
     /**
      * 文本。
@@ -465,6 +512,10 @@ declare global {
             "movable-view": wxml.MovableViewElement;
 
             "movable-area": wxml.MovableAreaElement;
+
+            "cover-view": wxml.CoverViewElement;
+
+            "cover-image": wxml.CoverImageElement;
 
             text: wxml.TextElement;
 
