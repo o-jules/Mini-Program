@@ -2,9 +2,9 @@ export = wxml;
 export as namespace wxml;
 
 declare namespace wxml {
-    interface Attributes { }
+    interface Attributes {}
 
-    interface InstrisicClassAttributes<T> { }
+    interface InstrisicClassAttributes<T> {}
 
     interface Element {
         class?: string;
@@ -12,9 +12,9 @@ declare namespace wxml {
         key?: string | number;
     }
 
-    interface EventHandle { }
+    interface EventHandle {}
 
-    interface BlockElement { }
+    interface BlockElement {}
 
     /**
      * 视图容器。
@@ -119,8 +119,129 @@ declare namespace wxml {
 
     /**
      * 滑块视图容器。
+     * 注意：其中只可放置<swiper-item/>组件，否则会导致未定义的行为。
      */
-    interface SwiperElement extends Element { }
+    interface SwiperElement extends Element {
+        /**
+         * 是否显示面板指示点。
+         * 默认值：false
+         */
+        indicatorDots: boolean;
+
+        /**
+         * 指示点颜色。
+         * 默认值：rgba(0, 0, 0, .3)
+         *
+         * @since 1.1.0
+         */
+        indicatorColor: string;
+
+        /**
+         * 当前选中的指示点颜色。
+         * 默认值：#000000
+         *
+         * @since 1.1.0
+         */
+        indicatorActiveColor: string;
+
+        /**
+         * 是否自动切换。
+         * 默认值：false
+         */
+        autoplay: boolean;
+
+        /**
+         * 当前所在滑块的 index。
+         * 默认值：0
+         */
+        current: number;
+
+        /**
+         * 当前所在滑块的 item-id ，不能与 current 被同时指定。
+         * 默认值：	""
+         * @since 1.9.0
+         */
+        currentItemId: string;
+    
+        /**
+         * 自动切换时间间隔。
+         * 默认值：5000
+         */
+        interval: number;
+
+        /**
+         * 滑动动画时长。
+         * 默认值：500
+         */
+        duration: number;
+
+        /**
+         * 是否采用衔接滑动。
+         * 默认值：false。
+         */
+        circular: boolean;
+
+        /**
+         * 滑动方向是否为纵向。
+         * 默认值：false。
+         */
+        vertical: boolean;
+    
+        /**
+         * 前边距，可用于露出前一项的一小部分，接受 px 和 rpx 值。
+         * 默认值："0px"。
+         * @since 1.9.0
+         */
+        previousMargin: string;
+    
+        /**
+         * 后边距，可用于露出后一项的一小部分，接受 px 和 rpx 值。
+         * 默认值："0px"
+         * @since 1.9.0
+         */
+        nextMargin: string;
+    
+        /**
+         * 同时显示的滑块数量
+         * 默认值：1
+         * @since 1.9.0
+         */
+        displayMultipleItems: number;
+
+        /**
+         * 是否跳过未显示的滑块布局，设为 true 可优化复杂情况下的滑动性能，但会丢失隐藏状态滑块的布局信息。
+         * 默认值：false
+         * @since 1.9.0
+         */
+        skipHiddenItemLayout: boolean;
+
+        /**
+         * current 改变时会触发 change 事件，event.detail = {current: current, source: source}。
+         * 从 1.4.0 开始，change事件返回detail中包含一个source字段，表示导致变更的原因，可能值如下：
+         *   - autoplay 自动播放导致swiper变化；
+         *   - touch 用户划动引起swiper变化；
+         *   - 其他原因将用空字符串表示。
+         */
+        bindchange: EventHandle;
+
+        /**
+         * 动画结束时会触发 animationfinish 事件，event.detail 同上。
+         * @since 1.9.0
+         */
+        bindanimationfinish: EventHandle;
+    }
+
+    /**
+     * 仅可放置在<swiper/>组件中，宽高自动设置为100%。
+     */
+    interface SwiperItemElement extends Element {
+        /**
+         * 该 swiper-item 的标识符。
+         * 默认值：""
+         * @since 1.9.0
+         */
+        itemId: string;
+    }
 
     /**
      * 文本。
@@ -139,24 +260,24 @@ declare namespace wxml {
          * 各个操作系统的空格标准并不一致。
          * @since 1.4.0
          */
-        space?:
-        /** 中文字符空格一半大小 */
-        'ensp' |
-        /** 中文字符空格大小 */
-        'emsp' |
-        /** 根据字体设置的空格大小 */
-        'nbsp';
+        space?: /** 中文字符空格一半大小 */
+
+            | "ensp"
+            /** 中文字符空格大小 */
+            | "emsp"
+            /** 根据字体设置的空格大小 */
+            | "nbsp";
 
         /**
          * 是否解码；
          * 默认值：false
-         * 
+         *
          * decode可以解析的有 &nbsp; &lt; &gt; &amp; &apos; &ensp; &emsp;
          * @since 1.4.0
          */
         decode?: boolean;
     }
-    
+
     /**
      * 图片。
      * {@link https://developers.weixin.qq.com/miniprogram/dev/component/image.html | 组件/媒体组件/image}
@@ -166,7 +287,7 @@ declare namespace wxml {
          * 图片裁剪、缩放的模式
          * 默认值：scaleToFill
          * mode 有 13 种模式，其中 4 种是缩放模式，9 种是裁剪模式。
-         * 
+         *
          *   模式	值              说明
          *   缩放	scaleToFill     不保持纵横比缩放图片，使图片的宽高完全拉伸至填满 image 元素
          *   缩放	aspectFit       保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来。
@@ -209,20 +330,22 @@ declare namespace wxml {
 }
 
 declare global {
-
     namespace JSX {
-        interface InstrisicClassAttributes<T> extends wxml.InstrisicClassAttributes<T> { }
+        interface InstrisicClassAttributes<T>
+            extends wxml.InstrisicClassAttributes<T> {}
 
-        interface InstrisicAttributes extends wxml.Attributes { }
+        interface InstrisicAttributes extends wxml.Attributes {}
 
         interface IntrinsicElements {
             block: wxml.BlockElement;
 
             view: wxml.ViewElement;
 
-            'scroll-view': wxml.ScrollViewElement;
+            "scroll-view": wxml.ScrollViewElement;
 
             swiper: wxml.SwiperElement;
+
+            "swiper-item": wxml.SwiperItemElement;
 
             text: wxml.TextElement;
 
@@ -230,4 +353,3 @@ declare global {
         }
     }
 }
-
