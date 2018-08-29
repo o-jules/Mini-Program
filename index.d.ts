@@ -250,10 +250,11 @@ declare namespace wxml {
      */
     interface MovableViewElement extends Element {
         /**
-         * movable-view的移动方向，属性值有all、vertical、horizontal、none。
+         * movable-view的移动方向，属性值有 all、vertical、horizontal、none。
          * 默认值：none
          */
-        direction?: string;
+        direction?: "all" | "vertical" | "horizontal" | "none";
+
         /**
          * movable-view是否带有惯性。
          * 默认值：false
@@ -360,7 +361,7 @@ declare namespace wxml {
     /**
      * 覆盖在原生组件之上的文本视图，可覆盖的原生组件包括map、video、canvas、camera、live-player、live-pusher，只支持嵌套cover-view、cover-image，可在cover-view中使用button。
      * 基础库 1.4.0 开始支持，低版本需做兼容处理。
-     * 
+     *
      * - tip: 基础库 2.2.4 起支持 touch 相关事件，也可使用 hover-class 设置点击态
      * - tip: 基础库 2.1.0 起支持设置 scale rotate 的 css 样式，包括 transition 动画
      * - tip: 基础库 1.9.90 起 cover-view 支持 overflow: scroll，但不支持动态更新 overflow
@@ -392,18 +393,49 @@ declare namespace wxml {
          * 图标路径，支持临时路径、网络地址（1.6.0起支持）、云文件ID（2.2.3起支持）。暂不支持base64格式。
          */
         src: string;
-    
+
         /**
          * 图片加载成功时触发
          * @since 2.1.0
          */
         bindload: EventHandle;
-    
+
         /**
          * 图片加载失败时触发
          * @since 2.1.0
          */
         binderror: EventHandle;
+    }
+
+    /**
+     * 图标。
+     */
+    interface IconElement extends Element {
+        /**
+         * icon的类型，有效值：success, success_no_circle, info, warn, waiting, cancel, download, search, clear。
+         * @type {string}
+         */
+        type:
+            | "success"
+            | "success_no_circle"
+            | "info"
+            | "warn"
+            | "waiting"
+            | "cancel"
+            | "download"
+            | "search"
+            | "clear";
+
+        /**
+         * icon的大小，单位px。
+         * 默认值：23
+         */
+        size: number;
+
+        /**
+         * icon的颜色，同css的color。
+         */
+        color: string;
     }
 
     /**
@@ -423,7 +455,8 @@ declare namespace wxml {
          * 各个操作系统的空格标准并不一致。
          * @since 1.4.0
          */
-        space /** 中文字符空格一半大小 */?:
+        space?:
+            /** 中文字符空格一半大小 */
             | "ensp"
             /** 中文字符空格大小 */
             | "emsp"
@@ -465,7 +498,20 @@ declare namespace wxml {
          *   裁剪	bottom left     不缩放图片，只显示图片的左下边区域
          *   裁剪	bottom right    不缩放图片，只显示图片的右下边区域
          */
-        mode?: string;
+        mode?:
+            | "scaleToFill"
+            | "aspectFit"
+            | "aspectFill"
+            | "widthFix"
+            | "top"
+            | "bottom"
+            | "center"
+            | "left"
+            | "right"
+            | "top left"
+            | "top right"
+            | "bottom left"
+            | "bottom right";
 
         /**
          * 图片懒加载。只针对page与scroll-view下的image有效
@@ -516,6 +562,8 @@ declare global {
             "cover-view": wxml.CoverViewElement;
 
             "cover-image": wxml.CoverImageElement;
+
+            icon: wxml.IconElement;
 
             text: wxml.TextElement;
 
