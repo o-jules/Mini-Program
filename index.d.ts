@@ -430,12 +430,12 @@ declare namespace wxml {
          * icon的大小，单位px。
          * 默认值：23
          */
-        size: number;
+        size?: number;
 
         /**
          * icon的颜色，同css的color。
          */
-        color: string;
+        color?: string;
     }
 
     /**
@@ -455,8 +455,8 @@ declare namespace wxml {
          * 各个操作系统的空格标准并不一致。
          * @since 1.4.0
          */
-        space?: /** 中文字符空格一半大小 */
-
+        space?:
+            /** 中文字符空格一半大小 */
             | "ensp"
             /** 中文字符空格大小 */
             | "emsp"
@@ -475,7 +475,7 @@ declare namespace wxml {
 
     interface RichTextNodeText {
         type: "text";
-    
+
         /**
          * 文本。支持entities
          */
@@ -484,12 +484,12 @@ declare namespace wxml {
 
     interface RichTextNodeNode {
         type: "node";
-    
+
         /**
          * 标签名。支持部分受信任的HTML节点
          */
         name: string;
-    
+
         /**
          * 属性。支持部分受信任的属性，遵循Pascal命名法
          */
@@ -498,7 +498,7 @@ declare namespace wxml {
         /**
          * 子节点列表
          */
-        children: Array<RichTextNode | string>;
+        children?: Array<RichTextNode | string>;
     }
 
     type RichTextNode = RichTextNodeText | RichTextNodeNode;
@@ -515,6 +515,57 @@ declare namespace wxml {
          * @since 1.4.0
          */
         nodes?: Array<RichTextNode> | string;
+    }
+
+    /**
+     * 进度条。
+     */
+    interface ProgressElement {
+        /**
+         * 百分比 0~100
+         */
+        percent?: number;
+
+        /**
+         * 在进度条右侧显示百分比。
+         * 默认值：false
+         */
+        showInfo?: boolean;
+
+        /**
+         * 进度条线的宽度，单位px
+         * 默认值：6
+         */
+        strokeWidth?: number;
+
+        /**
+         * 进度条颜色 （请使用 activeColor）。
+         * 默认值：#09BB07
+         */
+        color?: string;
+
+        /**
+         * 已选择的进度条的颜色。
+         */
+        activeColor?: string;
+
+        /**
+         * 未选择的进度条的颜色。
+         */
+        backgroundColor?: string;
+
+        /**
+         * 进度条从左往右的动画。
+         * 默认值：false
+         */
+        active?: boolean;
+    
+        /**
+         * backwards: 动画从头播；forwards：动画从上次结束点接着播。
+         * 默认值：backwards
+         * @since 1.7.0
+         */
+        activeMode?: "backwards" | "forwards";
     }
 
     /**
@@ -612,6 +663,8 @@ declare global {
             text: wxml.TextElement;
 
             "rich-text": wxml.RichTextElement;
+
+            progress: wxml.ProgressElement;
 
             image: wxml.ImageElement;
         }
