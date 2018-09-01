@@ -455,8 +455,8 @@ declare namespace wxml {
          * 各个操作系统的空格标准并不一致。
          * @since 1.4.0
          */
-        space?:
-            /** 中文字符空格一半大小 */
+        space?: /** 中文字符空格一半大小 */
+
             | "ensp"
             /** 中文字符空格大小 */
             | "emsp"
@@ -471,6 +471,50 @@ declare namespace wxml {
          * @since 1.4.0
          */
         decode?: boolean;
+    }
+
+    interface RichTextNodeText {
+        type: "text";
+    
+        /**
+         * 文本。支持entities
+         */
+        text: string;
+    }
+
+    interface RichTextNodeNode {
+        type: "node";
+    
+        /**
+         * 标签名。支持部分受信任的HTML节点
+         */
+        name: string;
+    
+        /**
+         * 属性。支持部分受信任的属性，遵循Pascal命名法
+         */
+        attrs?: object;
+
+        /**
+         * 子节点列表
+         */
+        children: Array<RichTextNode | string>;
+    }
+
+    type RichTextNode = RichTextNodeText | RichTextNodeNode;
+
+    /**
+     * 富文本。
+     * 基础库 1.4.0 开始支持，低版本需做兼容处理。
+     */
+    interface RichTextElement {
+        /**
+         * 节点列表 / HTML String。
+         * nodes 属性推荐使用 Array 类型，由于组件会将 String 类型转换为 Array 类型，因而性能会有所下降
+         * 默认值：[]
+         * @since 1.4.0
+         */
+        nodes?: Array<RichTextNode> | string;
     }
 
     /**
@@ -566,6 +610,8 @@ declare global {
             icon: wxml.IconElement;
 
             text: wxml.TextElement;
+
+            "rich-text": wxml.RichTextElement;
 
             image: wxml.ImageElement;
         }
