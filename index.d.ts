@@ -756,7 +756,8 @@ declare namespace wxml {
 
         /**
          * checkbox的颜色，同css的color
-         */ 
+         */
+
         color?: Color;
     }
 
@@ -1960,6 +1961,94 @@ declare namespace wxml {
          */
         bindscancode?: EventHandle;
     }
+
+    /**
+     * 实时音视频播放。该组件是原生组件，使用时请注意相关限制。
+     * 暂只针对国内主体如下类目的小程序开放，需要先通过类目审核，再在小程序管理后台，“设置”-“接口设置”中自助开通该组件权限。
+     *
+     * 基础库 1.7.0 开始支持，低版本需做兼容处理。
+     *
+     * | 一级类目   | 二级类目  |
+     * |-----------|---------|
+     * | 社交      | 直播 |
+     * | 教育      | 在线教育 |
+     * | 医疗      | 互联网医院，公立医院 |
+     * | 政务民生   | 所有二级类目 |
+     * | 金融      | 基金、信托、保险、银行、证券/期货、非金融机构自营小额贷款、征信业务、消费金融 |
+     *
+     * @since 1.7.0
+     */
+    interface LivePlayerElement extends Element {
+        /**
+         * 音视频地址。目前仅支持 flv, rtmp 格式。
+         */
+        src: string;
+    
+        /**
+         * live（直播），RTC（实时通话）。
+         * live
+         */
+        mode?: string;
+
+        /**
+         * 自动播放。
+         * 默认值：false
+         */
+        autoplay?: boolean;
+
+        /**
+         * 是否静音
+         * 默认值：false
+         */
+        muted?: boolean;
+
+        /**
+         * 画面方向，可选值有 vertical，horizontal。
+         * 默认值：vertical
+         */
+        orientation?: string;
+
+        /**
+         * 填充模式，可选值有 contain，fillCrop
+         * 默认值：contain
+         */
+        objectFit?: string;
+
+        /**
+         * 进入后台时是否静音（已废弃，默认退台静音）。
+         * 默认值：false
+         */
+        backgroundMute?: boolean;
+
+        /**
+         * 最小缓冲区，单位s
+         * 默认值：1
+         */
+        minCache?: number;
+
+        /**
+         * 最大缓冲区，单位s
+         * 默认值：3
+         */
+        maxCache?: number;
+
+        /**
+         * 播放状态变化事件，detail = {code}
+         */
+        bindstatechange?: EventHandle;
+
+        /**
+         * 全屏变化事件，detail = {direction, fullScreen}
+         */
+        bindfullscreenchange?: EventHandle;
+
+        /**
+         * 网络状态通知，detail = {info}
+         * @since 1.9.0
+         */
+        bindnetstatus?: EventHandle;
+    }
+
 }
 
 declare global {
@@ -2032,11 +2121,13 @@ declare global {
 
             audio: wxml.AudioElement;
 
+            image: wxml.ImageElement;
+
             video: wxml.VideoElement;
 
             camera: wxml.CameraElement;
 
-            image: wxml.ImageElement;
+            "live-player": wxml.LivePlayerElement;
         }
     }
 }
