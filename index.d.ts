@@ -569,6 +569,151 @@ declare namespace wxml {
     }
 
     /**
+     * 按钮。
+     */
+    interface ButtonElement extends Element {
+        /**
+         * 按钮的大小。
+         * 默认值：default
+         */
+        size?: "default" | "mini";
+    
+        /**
+         * 按钮的样式类型。
+         * 默认值：default
+         */
+        type?: "primary" | "default" | "warn";
+    
+        /**
+         * 按钮是否镂空，背景色透明。
+         * 默认值：false
+         */
+        plain?: boolean;
+    
+        /**
+         * 是否禁用。
+         * 默认值：false
+         */
+        disabled: boolean;
+    
+        /**
+         * 名称前是否带 loading 图标。
+         * 默认值：false
+         */
+        loading: boolean;
+    
+        /**
+         * 用于 <form/> 组件，点击分别会触发 <form/> 组件的 submit/reset 事件	
+         */	
+        formType: string;
+    
+        /**
+         * 微信开放能力。
+         * @since 1.1.0
+         */
+        openType: string;
+    
+        /**
+         * 指定按钮按下去的样式类。当 hover-class="none" 时，没有点击态效果。
+         * 默认值：button-hover
+         */
+        hoverClass?: string;
+    
+        /**
+         * 指定是否阻止本节点的祖先节点出现点击态。
+         * 默认值：false
+         * @since 1.5.0
+         */	
+        hoverStopPropagation?: boolean;
+    
+        /**
+         * 按住后多久出现点击态，单位毫秒。
+         * 默认值：20
+         */
+        hoverStartTime?: number;
+    
+        /**
+         * 手指松开后点击态保留时间，单位毫秒。
+         * 默认值：70
+         */
+        hoverStayTime?: number;
+
+        /**
+         * 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。open-type="getUserInfo"。
+         * 默认值：en
+         * @since 1.3.0
+         */
+        lang?: string;
+
+        /**
+         * 会话来源。open-type="contact"。
+         * 默认值：1.4.0
+         */
+        sessionFrom?: string;
+
+        /**
+         * 当前标题。会话内消息卡片标题。open-type="contact"。
+         * 默认值：1.5.0
+         */
+        sendMessageTitle?: string;
+
+        /**
+         * 当前分享路径。会话内消息卡片点击跳转小程序路径。open-type="contact"。
+         * 默认值：1.5.0
+         */
+        sendMessagePath?: string;
+
+        /**
+         * 截图。会话内消息卡片图片。open-type="contact"。
+         * @since 1.5.0
+         */
+        sendMessageImg?: string;
+
+        /**
+         * 显示会话内消息卡片。open-type="contact"。
+         * 默认值：false
+         * @since 1.5.0
+         */
+        showMessageCard?: boolean;
+
+        /**
+         * 打开 APP 时，向 APP 传递的参数。open-type="launchApp"。
+         * @since 1.9.5
+         */
+        appParameter?: string;
+
+        /**
+         * 当使用开放能力时，发生错误的回调。open-type="launchApp"。
+         * @since 1.9.5
+         */
+        binderror?: EventHandle;
+
+        /**
+         * 用户点击该按钮时，会返回获取到的用户信息，回调的detail数据与wx.getUserInfo返回的一致。open-type="getUserInfo"。
+         * @since 1.3.0
+         */
+        bindgetuserinfo?: EventHandle;
+
+        /**
+         * 客服消息回调。open-type="contact"。
+         * @since 1.5.0
+         */
+        bindcontact?: EventHandle;
+
+        /**
+         * 获取用户手机号回调。open-type="getPhoneNumber"。
+         * @since 1.2.0
+         */
+        bindgetphonenumber?: EventHandle;
+
+        /**
+         * 在打开授权设置页后回调。open-type="openSetting"。
+         * @since 2.0.7
+         */
+        bindopensetting?: EventHandle;
+    }
+
+    /**
      * 图片。
      * {@link https://developers.weixin.qq.com/miniprogram/dev/component/image.html | 组件/媒体组件/image}
      */
@@ -665,6 +810,8 @@ declare global {
             "rich-text": wxml.RichTextElement;
 
             progress: wxml.ProgressElement;
+
+            button: wxml.ButtonElement;
 
             image: wxml.ImageElement;
         }
