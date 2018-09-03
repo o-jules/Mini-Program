@@ -1911,6 +1911,55 @@ declare namespace wxml {
          */
         binderror?: EventHandle;
     }
+
+    /**
+     * 系统相机。该组件是原生组件，使用时请注意相关限制。
+     * 需要用户授权 scope.camera。
+     * 基础库 1.6.0 开始支持，低版本需做兼容处理。
+     * @since 1.6.0
+     */
+    interface CameraElement extends Element {
+        /**
+         * 有效值为 normal, scanCode。
+         * 默认值：normal
+         * @since 2.1.0
+         */
+        mode?: string;
+
+        /**
+         * 前置或后置，值为front, back。
+         * 默认值：back
+         */
+        devicePosition?: "front" | "back";
+
+        /**
+         * 闪光灯，值为auto, on, off。
+         * 默认值：auto
+         */
+        flash?: string;
+
+        /**
+         * 扫码识别区域，格式为[x, y, w, h]，x,y 是相对于camera显示区域的左上角，w,h为区域宽度，单位px，仅在 mode="scanCode" 时生效。
+         * @since 2.1.0
+         */
+        scanArea: [number, number, number, number];
+
+        /**
+         * 摄像头在非正常终止时触发，如退出后台等情况。
+         */
+        bindstop?: EventHandle;
+
+        /**
+         * 用户不允许使用摄像头时触发。
+         */
+        binderror?: EventHandle;
+
+        /**
+         * 在成功识别到一维码时触发，仅在 mode="scanCode" 时生效。
+         * @since 2.1.0
+         */
+        bindscancode?: EventHandle;
+    }
 }
 
 declare global {
@@ -1984,6 +2033,8 @@ declare global {
             audio: wxml.AudioElement;
 
             video: wxml.VideoElement;
+
+            camera: wxml.CameraElement;
 
             image: wxml.ImageElement;
         }
