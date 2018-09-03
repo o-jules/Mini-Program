@@ -2764,6 +2764,37 @@ declare namespace wxml {
          */
         binderror?: EventHandle;
     }
+
+    /**
+     * 用于展示微信开放的数据。
+     * 基础库 1.4.0 开始支持，低版本需做兼容处理。
+     */
+    interface OpenDataElement {
+        /**
+         * 开放数据类型。
+         * 
+         * - groupName: 拉取群名称；最低版本 1.4.0
+         * - userNickName: 用户昵称；最低版本 1.9.90
+         * - userAvatarUrl: 用户头像；最低版本 1.9.90
+         * - userGender: 用户性别；最低版本 1.9.90
+         * - userCity: 用户所在城市；最低版本 1.9.90
+         * - userProvince: 用户所在省份；最低版本 1.9.90
+         * - userCountry: 用户所在国家；最低版本 1.9.90
+         * - userLanguage: 用户的语言；最低版本 1.9.90
+         */
+        type: "groupName" | "userNickName" | "userAvatarUrl" | "userGender" | "userCity" | "userProvince" | "userCountry" | "userLanguage";
+
+        /**
+         * 当 type="groupName" 时生效, 群id。
+         */
+        openGid?: string;
+
+        /**
+         * 当 type="user*" 时生效，以哪种语言展示 userInfo，有效值有：en, zh_CN, zh_TW。
+         * 默认值：en
+         */
+        lang?: string;
+    }
 }
 
 declare global {
@@ -2849,6 +2880,8 @@ declare global {
             map: wxml.MapElement;
 
             canvas: wxml.CanvasElement;
+
+            "open-data": wxml.OpenDataElement;
         }
     }
 }
