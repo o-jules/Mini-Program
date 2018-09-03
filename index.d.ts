@@ -912,6 +912,227 @@ declare namespace wxml {
     }
 
     /**
+     * 普通选择器
+     */
+    interface PickerSelector {
+        mode: "selector";
+
+        /**
+         * mode为 selector 或 multiSelector 时，range 有效。
+         * 默认值：[]
+         */
+        range: Array<string>; // Array / Object Array;
+
+        /**
+         * 当 range 是一个 Object Array 时，通过 range-key 来指定 Object 中 key 的值作为选择器显示内容
+         */
+        rangeKey: string;
+
+        /**
+         * value 的值表示选择了 range 中的第几个（下标从 0 开始）
+         * 默认值：0
+         */
+        value?: number;
+
+        /**
+         * value 改变时触发 change 事件，event.detail = {value: value}
+         */
+        bindchange: EventHandle;
+
+        /**
+         * 是否禁用
+         * 默认值：false
+         */
+        disabled?: boolean;
+
+        /**
+         * 取消选择或点遮罩层收起 picker 时触发
+         * @since 1.9.90
+         */
+        bindcancel: EventHandle;
+    }
+
+    /**
+     * 多列选择器（最低版本：1.4.0）
+     * @since 1.4.0
+     */
+    interface PickerMultiSelector {
+        mode: "multiSelector";
+
+        /**
+         * mode为 selector 或 multiSelector 时，range 有效。二维数组，长度表示多少列，数组的每项表示每列的数据，如[["a","b"], ["c","d"]]。
+         * 默认值：[]
+         */
+        range?: Array<Array<string>>; // 二维Array / 二维Object Array;
+        /**
+         * 当 range 是一个 二维Object Array 时，通过 range-key 来指定 Object 中 key 的值作为选择器显示内容
+         */
+        rangeKey?: string;
+
+        /**
+         * value 每一项的值表示选择了 range 对应项中的第几个（下标从 0 开始）
+         * 默认值：[]
+         */
+        value?: Array<number>;
+
+        /**
+         * value 改变时触发 change 事件，event.detail = {value: value}。
+         */
+        bindchange?: EventHandle;
+
+        /**
+         * 某一列的值改变时触发 columnchange 事件，event.detail = {column: column, value: value}，column 的值表示改变了第几列（下标从0开始），value 的值表示变更值的下标。
+         */
+        bindcolumnchange?: EventHandle;
+
+        /**
+         * 取消选择时触发。
+         * @since 1.9.90
+         */
+        bindcancel?: EventHandle;
+
+        /**
+         * 是否禁用。
+         * 默认值：false
+         */
+        disabled?: boolean;
+    }
+
+    /**
+     * 时间选择器
+     */
+    interface PickerTime {
+        mode: "time";
+
+        /**
+         * 表示选中的时间，格式为"hh:mm"。
+         */
+        value?: string;
+
+        /**
+         * 表示有效时间范围的开始，字符串格式为"hh:mm"。
+         */
+        start?: string;
+
+        /**
+         * 表示有效时间范围的结束，字符串格式为"hh:mm"。
+         */
+        end?: string;
+
+        /**
+         * value 改变时触发 change 事件，event.detail = {value: value}。
+         */
+        bindchange?: EventHandle;
+
+        /**
+         * 取消选择时触发。
+         * @since 1.9.90
+         */
+        bindcancel?: EventHandle;
+        /**
+         * 是否禁用。
+         * 默认值：false
+         */
+        disabled?: boolean;
+    }
+
+    /**
+     * 日期选择器
+     */
+    interface PickerDate {
+        mode: "date";
+
+        /**
+         * 表示选中的日期，格式为"YYYY-MM-DD"。
+         * 默认值：0
+         */
+        value?: string;
+
+        /**
+         * 表示有效日期范围的开始，字符串格式为"YYYY-MM-DD"
+         */
+        start?: string;
+
+        /**
+         * 表示有效日期范围的结束，字符串格式为"YYYY-MM-DD"
+         */
+        end?: string;
+
+        /**
+         * 有效值 year,month,day，表示选择器的粒度。
+         * 默认值：day。
+         * - year  选择器粒度为年
+         * - month 选择器粒度为月份
+         * - day   选择器粒度为天
+         */
+        fields?: "year" | "month" | "day";
+
+        /**
+         * value 改变时触发 change 事件，event.detail = {value: value}
+         */
+        bindchange?: EventHandle;
+
+        /**
+         * 取消选择时触发
+         * @since 1.9.90
+         */
+        bindcancel?: EventHandle;
+
+        /**
+         * 是否禁用
+         * 默认值：false
+         */
+        disabled?: boolean;
+    }
+
+    /**
+     * 省市区选择器（最低版本：1.4.0）
+     * @since 1.4.0
+     */
+    interface PickerRegion {
+        mode: "region";
+
+        /**
+         * 表示选中的省市区，默认选中每一列的第一个值
+         * 默认值：[]
+         */
+        value?: Array<string>;
+
+        /**
+         * 可为每一列的顶部添加一个自定义的项
+         * @since 1.5.0
+         */
+        customItem?: string;
+
+        /**
+         * value 改变时触发 change 事件，event.detail = {value: value, code: code, postcode: postcode}，其中字段code是统计用区划代码，postcode是邮政编码
+         */
+        bindchange?: EventHandle;
+
+        /**
+         * 取消选择时触发
+         * @since 1.9.90
+         */
+        bindcancel?: EventHandle;
+    
+        /**
+         * 是否禁用。
+         * 默认值：false
+         */
+        disabled?: boolean;
+    }
+
+    /**
+     * 从底部弹起的滚动选择器，现支持五种选择器，通过mode来区分，分别是普通选择器，多列选择器，时间选择器，日期选择器，省市区选择器，默认是普通选择器。
+     */
+    type PickerElement =
+        | PickerSelector
+        | PickerMultiSelector
+        | PickerTime
+        | PickerDate
+        | PickerRegion;
+
+    /**
      * 图片。
      * {@link https://developers.weixin.qq.com/miniprogram/dev/component/image.html | 组件/媒体组件/image}
      */
@@ -1020,6 +1241,8 @@ declare global {
             input: wxml.InputElement;
 
             label: wxml.LabelElement;
+
+            picker: wxml.PickerElement;
 
             image: wxml.ImageElement;
         }
