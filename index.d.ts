@@ -145,7 +145,7 @@ declare namespace wxml {
          *
          * @since 1.1.0
          */
-        indicatorColor?: string;
+        indicatorColor?: Color;
 
         /**
          * 当前选中的指示点颜色。
@@ -153,7 +153,7 @@ declare namespace wxml {
          *
          * @since 1.1.0
          */
-        indicatorActiveColor?: string;
+        indicatorActiveColor?: Color;
 
         /**
          * 是否自动切换。
@@ -446,7 +446,7 @@ declare namespace wxml {
         /**
          * icon的颜色，同css的color。
          */
-        color?: string;
+        color?: Color;
     }
 
     /**
@@ -552,12 +552,12 @@ declare namespace wxml {
          * 进度条颜色 （请使用 activeColor）。
          * 默认值：#09BB07
          */
-        color?: string;
+        color?: Color;
 
         /**
          * 已选择的进度条的颜色。
          */
-        activeColor?: string;
+        activeColor?: Color;
 
         /**
          * 未选择的进度条的颜色。
@@ -756,8 +756,8 @@ declare namespace wxml {
 
         /**
          * checkbox的颜色，同css的color
-         */
-        color?: string;
+         */ 
+        color?: Color;
     }
 
     /**
@@ -1220,7 +1220,7 @@ declare namespace wxml {
         /**
          * radio的颜色，同css的color
          */
-        color?: string;
+        color?: Color;
     }
 
     /**
