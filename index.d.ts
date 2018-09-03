@@ -2170,9 +2170,9 @@ declare namespace wxml {
 
         /**
          * 状态变化事件，detail = {code}
-         * 
+         *
          * 状态码（code）
-         * 
+         *
          * | 代码   | 说明 |
          * |-------|-----|
          * | 1001  | 已经连接推流服务器 |
@@ -2206,15 +2206,15 @@ declare namespace wxml {
          * | 3003  | RTMP服务器握手失败 |
          * | 3004  | RTMP服务器主动断开，请检查推流地址的合法性或防盗链有效期 |
          * | 3005  | RTMP 读/写失败 |
-         * 
+         *
          */
         bindstatechange?: EventHandle;
 
         /**
          * 网络状态通知，detail = {info}
-         * 
+         *
          * 网络状态数据（info）
-         * 
+         *
          * | 键名  | 说明 |
          * |------|------|
          * | videoBitrate  | 当前视频编/码器输出的比特率，单位 kbps |
@@ -2225,24 +2225,490 @@ declare namespace wxml {
          * | netJitter     | 网络抖动情况，抖动越大，网络越不稳定 |
          * | videoWidth    | 视频画面的宽度 |
          * | videoHeight   | 视频画面的高度 |
-         * 
+         *
          * @since 1.9.0
          */
         bindnetstatus?: EventHandle;
 
         /**
          * 渲染错误事件，detail = {errMsg, errCode}
-         * 
+         *
          * 错误码（errCode）
-         * 
+         *
          * |  代码  |  说明  |
          * |-------|--------|
          * | 10001 |用户禁止使用摄像头 |
          * | 10002 | 用户禁止使用录音 |
-         * 
+         *
          * @since 1.7.4
          */
         binderror?: EventHandle;
+    }
+
+    /**
+     * 地图。该组件是原生组件，使用时请注意相关限制。
+     */
+    interface MapElement {
+        /**
+         * 中心经度。
+         */
+        longitude?: number;
+
+        /**
+         * 中心纬度。
+         */
+        latitude?: number;
+
+        /**
+         * 缩放级别，取值范围为5-18。
+         * 默认值：16
+         */
+        scale?: number;
+
+        /**
+         * 标记点
+         */
+        markers?: Array<MapMarker>;
+
+        /**
+         * 即将移除，请使用 markers
+         * @deprecated
+         */
+        covers?: Array<MapMarker>;
+
+        /**
+         * 路线
+         */
+        polyline?: Array<MapPolyline>;
+
+        /**
+         * 圆
+         */
+        circles?: Array<MapCircle>;
+
+        /**
+         * 控件（即将废弃，建议使用 cover-view 代替）
+         * @deprecated
+         */
+        controls?: Array<MapControl>;
+
+        /**
+         * 缩放视野以包含所有给定的坐标点
+         */
+        includePoints?: Array<MapPoint>;
+
+        /**
+         * 显示带有方向的当前定位点
+         */
+        showLocation?: boolean;
+
+        /**
+         * 点击标记点时触发，会返回marker的id
+         */
+        bindmarkertap?: EventHandle;
+
+        /**
+         * 点击标记点对应的气泡时触发，会返回marker的id
+         * @since 1.2.0
+         */
+        bindcallouttap?: EventHandle;
+
+        /**
+         * 点击控件时触发，会返回control的id
+         */
+        bindcontroltap?: EventHandle;
+
+        /**
+         * 视野发生变化时触发
+         */
+        bindregionchange?: EventHandle;
+
+        /**
+         * 点击地图时触发
+         */
+        bindtap?: EventHandle;
+
+        /**
+         * 在地图渲染更新完成时触发
+         * @since 1.6.0
+         */
+        bindupdated?: EventHandle;
+    }
+
+    /**
+     * 标记点用于在地图上显示标记的位置。
+     */
+    interface MapMarker {
+        /**
+         * 标记点id
+         * marker点击事件回调会返回此id。建议为每个marker设置上Number类型id，保证更新marker时有更好的性能。
+         */
+        id?: number;
+
+        /**
+         * 纬度。
+         * 浮点数，范围 -90 ~ 90
+         */
+        latitude: number;
+
+        /**
+         * 经度。
+         * 浮点数，范围 -180 ~ 180
+         */
+        longitude: number;
+
+        /**
+         * 标注点名
+         */
+        title?: string;
+
+        /**
+         * 显示的图标。
+         * 项目目录下的图片路径，支持相对路径写法，以'/'开头则表示相对小程序根目录；也支持临时路径
+         */
+        iconPath: string;
+
+        /**
+         * 旋转角度
+         * 顺时针旋转的角度，范围 0 ~ 360，默认为 0
+         */
+        rotate?: number;
+
+        /**
+         * 标注的透明度。
+         * 默认1，无透明，范围 0 ~ 1
+         */
+        alpha?: number;
+
+        /**
+         * 标注图标宽度。
+         * 默认为图片实际宽度。
+         */
+        width?: number;
+
+        /**
+         * 标注图标高度。
+         * 默认为图片实际高度。
+         */
+        height?: number;
+
+        /**
+         * 自定义标记点上方的气泡窗口。
+         * 支持的属性见下表，可识别换行符。
+         * @since 1.2.0
+         */
+        callout?: MarkerCallout;
+
+        /**
+         * 为标记点旁边增加标签。
+         * 支持的属性见下表，可识别换行符。
+         * @since 1.2.0
+         */
+        label?: MarkerLabel;
+
+        /**
+         * 经纬度在标注图标的锚点，默认底边中点。
+         * {x, y}，x表示横向(0-1)，y表示竖向(0-1)。{x: .5, y: 1} 表示底边中点。
+         * @since 1.2.0
+         */
+        anchor?: { x: number; y: number };
+    }
+
+    /**
+     * marker 上的气泡 callout
+     */
+    interface MarkerCallout {
+        /**
+         * 文本。
+         *
+         * @since 1.2.0
+         */
+        content?: string;
+
+        /**
+         * 文本颜色。
+         *
+         * @since 1.2.0
+         */
+        color?: string;
+
+        /**
+         * 文字大小。
+         *
+         * @since 1.2.0
+         */
+        fontSize?: number;
+
+        /**
+         * callout边框圆角。
+         *
+         * @since 1.2.0
+         */
+        borderRadius?: number;
+
+        /**
+         * 背景色。
+         *
+         * @since 1.2.0
+         */
+        bgColor?: string;
+
+        /**
+         * 文本边缘留白。
+         *
+         * @since 1.2.0
+         */
+        padding?: number;
+
+        /**
+         * 'BYCLICK':点击显示; 'ALWAYS':常显
+         */
+        display?: "BYCLICK" | "ALWAYS";
+
+        /**
+         * 文本对齐方式。有效值: left, right, center。
+         *
+         * @since 1.6.0
+         */
+        textAlign?: "left" | "right" | "center";
+    }
+
+    /**
+     * marker 上的气泡 label
+     */
+    interface MarkerLabel {
+        /**
+         * 文本。
+         * @since 1.2.0
+         */
+        content?: string;
+
+        /**
+         * 文本颜色。
+         * @since 1.2.0
+         */
+        color?: string;
+
+        /**
+         * 文字大小。
+         * @since 1.2.0
+         */
+        fontSize?: number;
+
+        /**
+         * label的坐标（废弃）。
+         * @since 1.2.0
+         */
+        x?: number;
+
+        /**
+         * label的坐标（废弃）。
+         * @since 1.2.0
+         */
+        y?: number;
+
+        /**
+         * label的坐标，原点是 marker 对应的经纬度。
+         * @since 2.1.0
+         */
+        anchorX?: number;
+
+        /**
+         * label的坐标，原点是 marker 对应的经纬度。
+         * @since 2.1.0
+         */
+        anchorY?: number;
+
+        /**
+         * 边框宽度。
+         * @since 1.6.0
+         */
+        borderWidth?: number;
+
+        /**
+         * 边框颜色。
+         * @since 1.6.0
+         */
+        borderColor?: Color;
+
+        /**
+         * 边框圆角。
+         * @since 1.6.0
+         */
+        borderRadius?: number;
+
+        /**
+         * 背景色。
+         * @since 1.6.0
+         */
+        bgColor?: Color;
+
+        /**
+         * 文本边缘留白。
+         * @since 1.6.0
+         */
+        padding?: number;
+
+        /**
+         * 文本对齐方式。有效值: left, right, center。
+         * @since 1.6.0
+         */
+        textAlign?: "left" | "right" | "center";
+    }
+
+    /**
+     * 指定一系列坐标点，从数组第一项连线至最后一项。
+     */
+    interface MapPolyline {
+        /**
+         * 经纬度数组。
+         * 默认值：[{latitude: 0, longitude: 0}]
+         */
+        points: Array<MapPoint>;
+
+        /**
+         * 线的颜色。
+         * 8位十六进制表示，后两位表示alpha值，如：#000000AA
+         */
+        color?: string;
+
+        /**
+         * 线的宽度。
+         */
+        width?: number;
+        /**
+         * 是否虚线。
+         * 默认值：false
+         */
+        dottedLine?: boolean;
+
+        /**
+         * 带箭头的线。
+         * 默认值：false，开发者工具暂不支持该属性。
+         *
+         * @since 1.2.0
+         */
+        arrowLine?: boolean;
+
+        /**
+         * 更换箭头图标。
+         * 在arrowLine为true时生效。
+         *
+         * @since 1.6.0
+         */
+        arrowIconPath?: string;
+
+        /**
+         * 线的边框颜色。
+         * @since 1.2.0
+         */
+        borderColor?: string;
+
+        /**
+         * 线的厚度。
+         *
+         * @since 1.2.0
+         */
+        borderWidth?: number;
+    }
+
+    /**
+     * 在地图上显示圆
+     */
+    interface MapCircle {
+        /**
+         * 纬度。
+         * 浮点数，范围 -90 ~ 90。
+         */
+        latitude: number;
+
+        /**
+         * 经度。
+         * 浮点数，范围 -180 ~ 180。
+         */
+        longitude?: number;
+
+        /**
+         * 描边的颜色。
+         * 8位十六进制表示，后两位表示alpha值，如：#000000AA
+         */
+        color: string;
+
+        /**
+         * 填充颜色。
+         * 8位十六进制表示，后两位表示alpha值，如：#000000AA
+         */
+        fillColor: string;
+
+        /**
+         * 半径。
+         */
+        radius: number;
+
+        /**
+         * 描边的宽度。
+         */
+        strokeWidth?: number;
+    }
+
+    /**
+     * 在地图上显示控件，控件不随着地图移动。即将废弃，请使用 cover-view。
+     */
+    interface MapControl {
+        /**
+         * 控件id。
+         * 在控件点击事件回调会返回此id。
+         */
+        id?: Number;
+
+        /**
+         * 控件在地图的位置。
+         * 控件相对地图位置。
+         */
+        position: ControlPosition;
+
+        /**
+         * 显示的图标。
+         * 项目目录下的图片路径，支持相对路径写法，以'/'开头则表示相对小程序根目录；也支持临时路径。
+         */
+        iconPath: string;
+
+        /**
+         * 是否可点击。默认不可点击。
+         * 默认值：false
+         */
+        clickable?: boolean;
+    }
+
+    interface ControlPosition {
+        /**
+         * 距离地图的左边界多远。
+         * 默认为0。
+         */
+        left?: Number;
+
+        /**
+         * 距离地图的上边界多远。
+         * 默认为0
+         */
+        top?: number;
+
+        /**
+         * 控件宽度。
+         * 默认为图片宽度。
+         */
+        width?: number;
+
+        /**
+         * 控件高度。
+         * 默认为图片高度。
+         */
+        height?: number;
+    }
+
+    interface MapPoint {
+        latitude: number;
+        longitude: number;
     }
 }
 
@@ -2325,6 +2791,8 @@ declare global {
             "live-player": wxml.LivePlayerElement;
 
             "live-pusher": wxml.LivePusherElement;
+
+            map: wxml.MapElement;
         }
     }
 }
