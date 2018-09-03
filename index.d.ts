@@ -16,6 +16,8 @@ declare namespace wxml {
 
     interface BlockElement {}
 
+    type Color = string;
+
     /**
      * 视图容器。
      */
@@ -1213,6 +1215,96 @@ declare namespace wxml {
     }
 
     /**
+     * 滑动选择器。
+     */
+    interface SliderElement extends Element {
+        /**
+         * 最小值。
+         * 默认值：0
+         */
+        min?: number;
+
+        /**
+         * 最大值。
+         * 默认值：100
+         */
+        max?: number;
+
+        /**
+         * 步长，取值必须大于 0，并且可被(max - min)整除。
+         * 默认值：1
+         */
+        step?: number;
+
+        /**
+         * 是否禁用。
+         * 默认值：false
+         */
+        disabled?: boolean;
+
+        /**
+         * 当前取值。
+         * 默认值：0
+         */
+        value?: number;
+
+        /**
+         * 背景条的颜色（请使用 backgroundColor）。
+         * 默认值：#e9e9e9
+         */
+        color: Color;
+
+        /**
+         * 已选择的颜色（请使用 activeColor）。
+         * 默认值：#1aad19
+         */
+        selectedColor: Color;
+
+        /**
+         * 已选择的颜色。
+         * 默认值：#1aad19
+         */
+        activeColor: Color;
+
+        /**
+         * 背景条的颜色。
+         * 默认值：#e9e9e9
+         */
+        backgroundColor: Color;
+
+        /**
+         * 滑块的大小，取值范围为 12 - 28。
+         * 默认值：28
+         * @since 1.9.0
+         */
+        blockSize?: number;
+
+        /**
+         * 滑块的颜色。
+         * 默认值：#ffffff
+         * @since 1.9.0
+         */
+        blockColor: Color;
+
+        /**
+         * 是否显示当前 value。
+         * 默认值：false
+         */
+        showValue?: boolean;
+
+        /**
+         * 完成一次拖动后触发的事件，event.detail = {value: value}
+         */
+        bindchange?: EventHandle;
+
+        /**
+         * 拖动过程中触发的事件，event.detail = {value: value}
+         * @since 1.7.0
+         */
+        bindchanging?: EventHandle;
+    }
+
+    /**
      * 图片。
      * {@link https://developers.weixin.qq.com/miniprogram/dev/component/image.html | 组件/媒体组件/image}
      */
@@ -1331,6 +1423,8 @@ declare global {
             "radio-group": wxml.RadioGroupElement;
 
             radio: wxml.RadioElement;
+
+            slider: wxml.SliderElement;
 
             image: wxml.ImageElement;
         }
