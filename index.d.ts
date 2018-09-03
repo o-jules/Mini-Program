@@ -1305,6 +1305,33 @@ declare namespace wxml {
     }
 
     /**
+     * 开关选择器。
+     */
+    interface SwitchElement extends Element {
+        /**
+         * 是否选中。
+         * 默认值：false
+         */
+        checked?: boolean; 
+
+        /**
+         * 样式，有效值：switch, checkbox。
+         * 默认值：switch
+         */
+        type?: "switch" | "checkbox";
+
+        /**
+         * checked 改变时触发 change 事件，event.detail={ value: checked }。
+         */
+        bindchange?: EventHandle;
+    
+        /**
+         * switch 的颜色，同 css 的 color。
+         */
+        color?: Color;
+    }
+
+    /**
      * 图片。
      * {@link https://developers.weixin.qq.com/miniprogram/dev/component/image.html | 组件/媒体组件/image}
      */
@@ -1425,6 +1452,8 @@ declare global {
             radio: wxml.RadioElement;
 
             slider: wxml.SliderElement;
+
+            switch: wxml.SwitchElement;
 
             image: wxml.ImageElement;
         }
