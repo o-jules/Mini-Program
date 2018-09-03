@@ -1176,6 +1176,43 @@ declare namespace wxml {
     interface PickerViewColumnElement extends Element {}
 
     /**
+     * 单项选择器，内部由多个<radio/>组成。
+     */
+    interface RadioGroupElement extends Element {
+        /**
+         * <radio-group/> 中的选中项发生变化时触发 change 事件，event.detail = {value: 选中项radio的value}
+         */
+        bindchange?: EventHandle;
+    }
+
+    /**
+     * 单选项目
+     */
+    interface RadioElement extends Element {
+        /**
+         * <radio/> 标识。当该<radio/> 选中时，<radio-group/> 的 change 事件会携带<radio/>的value。
+         */
+        value?: string;
+
+        /**
+         * 当前是否选中。
+         * false
+         */
+        checked?: boolean;
+
+        /**
+         * 是否禁用。
+         * false
+         */
+        disabled?: boolean;
+
+        /**
+         * radio的颜色，同css的color
+         */
+        color?: string;
+    }
+
+    /**
      * 图片。
      * {@link https://developers.weixin.qq.com/miniprogram/dev/component/image.html | 组件/媒体组件/image}
      */
@@ -1290,6 +1327,10 @@ declare global {
             "picker-view": wxml.PickerViewElement;
 
             "picker-view-column": wxml.PickerViewColumnElement;
+
+            "radio-group": wxml.RadioGroupElement;
+
+            radio: wxml.RadioElement;
 
             image: wxml.ImageElement;
         }
