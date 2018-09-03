@@ -453,17 +453,14 @@ declare namespace wxml {
         /**
          * 显示连续空格。
          * 各个操作系统的空格标准并不一致。
-         * 
+         *
          * - ensp 中文字符空格一半大小
          * - emsp 中文字符空格大小
          * - nbsp 根据字体设置的空格大小
-         * 
+         *
          * @since 1.4.0
          */
-        space?:
-            | "ensp"
-            | "emsp"
-            | "nbsp";
+        space?: "ensp" | "emsp" | "nbsp";
 
         /**
          * 是否解码；
@@ -733,23 +730,44 @@ declare namespace wxml {
          * <checkbox/>标识，选中时触发<checkbox-group/>的 change 事件，并携带 <checkbox/> 的 value。
          */
         value?: string;
-    
+
         /**
          * 是否禁用。
          * false
          */
         disabled?: boolean;
-    
+
         /**
          * 当前是否选中，可用来设置默认选中。
          * false
          */
         checked?: boolean;
-    
+
         /**
          * checkbox的颜色，同css的color
          */
         color?: string;
+    }
+
+    /**
+     * 表单，将组件内的用户输入的<switch/> <input/> <checkbox/> <slider/> <radio/> <picker/> 提交。
+     * 当点击 <form/> 表单中 formType 为 submit 的 <button/> 组件时，会将表单组件中的 value 值进行提交，需要在表单组件中加上 name 来作为 key。
+     */
+    interface FormElement {
+        /**
+         * 是否返回 formId 用于发送模板消息。
+         */
+        reportSubmit?: boolean;
+
+        /**
+         * 携带 form 中的数据触发 submit 事件，event.detail = {value : {'name': 'value'} , formId: ''}。
+         */
+        bindsubmit?: EventHandle;
+
+        /**
+         * 表单重置时会触发 reset 事件。
+         */
+        bindreset?: EventHandle;
     }
 
     /**
@@ -852,9 +870,11 @@ declare global {
 
             button: wxml.ButtonElement;
 
-            "checkbox-gruop": wxml.CheckboxGroupElement;
+            "checkbox-group": wxml.CheckboxGroupElement;
 
             checkbox: wxml.CheckboxElement;
+
+            form: wxml.FormElement;
 
             image: wxml.ImageElement;
         }
