@@ -2,6 +2,16 @@ export = wxml;
 export as namespace wxml;
 
 declare namespace wxml {
+    /**
+     * 颜色
+     */
+    type Color = string;
+
+    /**
+     * 版本
+     */
+    type Version = "release" | "develop" | "trial";
+
     interface Attributes {}
 
     interface InstrisicClassAttributes<T> {}
@@ -15,8 +25,6 @@ declare namespace wxml {
     interface EventHandle {}
 
     interface BlockElement {}
-
-    type Color = string;
 
     /**
      * 视图容器。
@@ -1507,7 +1515,7 @@ declare namespace wxml {
          * 默认值：release
          * @since 2.0.7
          */
-        version: "develop" | "release" | "trial";
+        version: Version;
 
         /**
          * 指定点击时的样式类，当hover-class="none"时，没有点击态效果。
@@ -1527,7 +1535,7 @@ declare namespace wxml {
          * 默认值：50
          */
         hoverStartTime?: number;
-    
+
         /**
          * 手指松开后点击态保留时间，单位毫秒。
          * 默认值：600
@@ -1539,18 +1547,57 @@ declare namespace wxml {
          * @since 2.0.7
          */
         bindsuccess?: string;
-    
+
         /**
          * 当target="miniProgram"时有效，跳转小程序失败。
          * @since 2.0.7
          */
         binderror?: string;
-    
+
         /**
          * 当target="miniProgram"时有效，跳转小程序完成。
          * @since 2.0.7
          */
         bindcomplete?: string;
+    }
+
+    /**
+     * 这个组件从小程序基础库版本 2.1.0 开始支持。
+     * 仅在插件的自定义组件中有效，用于跳转到插件功能页。
+     * @since 2.1.0
+     */
+    interface FunctionalPageNavigatorElement extends Element {
+        /**
+         * 跳转到的小程序版本，有效值 develop（开发版），trial（体验版），release（正式版）；线上版本必须设置为 release。
+         * 默认值：release
+         * @since 2.1.0
+         */
+        version?: Version;
+
+        /**
+         * 要跳转到的功能页
+         * @since 2.1.0
+         */
+        name?: string;
+
+        /**
+         * 功能页参数，参数格式与具体功能页相关。
+         * 默认值：null
+         * @since 2.1.0
+         */
+        args?: any;
+
+        /**
+         * 功能页返回，且操作成功时触发， detail 格式与具体功能页相关。
+         * @since 2.1.0
+         */
+        bindsuccess?: EventHandle;
+
+        /**
+         * 功能页返回，且操作失败时触发， detail 格式与具体功能页相关。
+         * @since 2.1.0
+         */
+        bindfail?: EventHandle;
     }
 
     /**
@@ -1680,6 +1727,8 @@ declare global {
             textarea: wxml.TextareaElement;
 
             navigator: wxml.NavigatorElement;
+
+            "functional-page-navigator": wxml.FunctionalPageNavigatorElement;
 
             image: wxml.ImageElement;
         }
