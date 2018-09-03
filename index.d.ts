@@ -453,14 +453,16 @@ declare namespace wxml {
         /**
          * 显示连续空格。
          * 各个操作系统的空格标准并不一致。
+         * 
+         * - ensp 中文字符空格一半大小
+         * - emsp 中文字符空格大小
+         * - nbsp 根据字体设置的空格大小
+         * 
          * @since 1.4.0
          */
         space?:
-            /** 中文字符空格一半大小 */
             | "ensp"
-            /** 中文字符空格大小 */
             | "emsp"
-            /** 根据字体设置的空格大小 */
             | "nbsp";
 
         /**
@@ -559,7 +561,7 @@ declare namespace wxml {
          * 默认值：false
          */
         active?: boolean;
-    
+
         /**
          * backwards: 动画从头播；forwards：动画从上次结束点接着播。
          * 默认值：backwards
@@ -577,61 +579,61 @@ declare namespace wxml {
          * 默认值：default
          */
         size?: "default" | "mini";
-    
+
         /**
          * 按钮的样式类型。
          * 默认值：default
          */
         type?: "primary" | "default" | "warn";
-    
+
         /**
          * 按钮是否镂空，背景色透明。
          * 默认值：false
          */
         plain?: boolean;
-    
+
         /**
          * 是否禁用。
          * 默认值：false
          */
         disabled: boolean;
-    
+
         /**
          * 名称前是否带 loading 图标。
          * 默认值：false
          */
         loading: boolean;
-    
+
         /**
-         * 用于 <form/> 组件，点击分别会触发 <form/> 组件的 submit/reset 事件	
-         */	
+         * 用于 <form/> 组件，点击分别会触发 <form/> 组件的 submit/reset 事件
+         */
         formType: string;
-    
+
         /**
          * 微信开放能力。
          * @since 1.1.0
          */
         openType: string;
-    
+
         /**
          * 指定按钮按下去的样式类。当 hover-class="none" 时，没有点击态效果。
          * 默认值：button-hover
          */
         hoverClass?: string;
-    
+
         /**
          * 指定是否阻止本节点的祖先节点出现点击态。
          * 默认值：false
          * @since 1.5.0
-         */	
+         */
         hoverStopPropagation?: boolean;
-    
+
         /**
          * 按住后多久出现点击态，单位毫秒。
          * 默认值：20
          */
         hoverStartTime?: number;
-    
+
         /**
          * 手指松开后点击态保留时间，单位毫秒。
          * 默认值：70
@@ -711,6 +713,43 @@ declare namespace wxml {
          * @since 2.0.7
          */
         bindopensetting?: EventHandle;
+    }
+
+    /**
+     * 多项选择器，内部由多个checkbox组成。
+     */
+    interface CheckboxGroupElement extends Element {
+        /**
+         * <checkbox-group/>中选中项发生改变是触发 change 事件，detail = {value:[选中的checkbox的value的数组]}
+         */
+        bindchange?: EventHandle;
+    }
+
+    /**
+     * 多选项目。
+     */
+    interface CheckboxElement extends Element {
+        /**
+         * <checkbox/>标识，选中时触发<checkbox-group/>的 change 事件，并携带 <checkbox/> 的 value。
+         */
+        value?: string;
+    
+        /**
+         * 是否禁用。
+         * false
+         */
+        disabled?: boolean;
+    
+        /**
+         * 当前是否选中，可用来设置默认选中。
+         * false
+         */
+        checked?: boolean;
+    
+        /**
+         * checkbox的颜色，同css的color
+         */
+        color?: string;
     }
 
     /**
@@ -812,6 +851,10 @@ declare global {
             progress: wxml.ProgressElement;
 
             button: wxml.ButtonElement;
+
+            "checkbox-gruop": wxml.CheckboxGroupElement;
+
+            checkbox: wxml.CheckboxElement;
 
             image: wxml.ImageElement;
         }
