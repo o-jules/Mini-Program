@@ -12,14 +12,15 @@ declare namespace wxml {
      */
     type Version = "release" | "develop" | "trial";
 
-    interface Attributes {}
+    interface IntrinsicAttributes {
+        key?: string | number;
+    }
 
-    interface InstrisicClassAttributes<T> {}
+    interface IntrinsicClassAttributes<T> {}
 
     interface Element {
         class?: string;
         id?: string;
-        key?: string | number;
     }
 
     interface EventHandle {}
@@ -1601,6 +1602,83 @@ declare namespace wxml {
     }
 
     /**
+     * 音频。
+     * 注意：1.6.0 版本开始，该组件不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
+     * @deprecated
+     */
+    interface AudioElement extends Element {
+        /**
+         * audio 组件的唯一标识符。
+         */
+        id?: string;
+
+        /**
+         * 要播放音频的资源地址。
+         */
+        src?: string;
+
+        /**
+         * 是否循环播放。
+         * 默认值：false
+         */
+        loop?: boolean;
+
+        /**
+         * 是否显示默认控件。
+         * 默认值：false
+         */
+        controls?: boolean;
+
+        /**
+         * 默认控件上的音频封面的图片资源地址，如果 controls 属性值为 false 则设置 poster 无效。
+         */
+        poster?: string;
+
+        /**
+         * 默认控件上的音频名字，如果 controls 属性值为 false 则设置 name 无效。
+         * 默认值：未知音频
+         */
+        name?: string;
+
+        /**
+         * 默认控件上的作者名字，如果 controls 属性值为 false 则设置 author 无效。
+         * 默认值：未知作者
+         */
+        author?: string;
+
+        /**
+         * 当发生错误时触发 error 事件，detail = {errMsg: MediaError.code}。
+         * 
+         * MediaError.code
+         * - 1	获取资源被用户禁止
+         * - 2	网络错误
+         * - 3	解码错误
+         * - 4	不合适资源
+         */
+        binderror?: EventHandle;
+
+        /**
+         * 当开始/继续播放时触发play事件。
+         */
+        bindplay?: EventHandle;
+
+        /**
+         * 当暂停播放时触发 pause 事件。
+         */
+        bindpause?: EventHandle;
+
+        /**
+         * 当播放进度改变时触发 timeupdate 事件，detail = {currentTime, duration}。
+         */
+        bindtimeupdate?: EventHandle;
+
+        /**
+         * 当播放到末尾时触发 ended 事件。
+         */
+        bindended?: EventHandle;
+    }
+
+    /**
      * 图片。
      * {@link https://developers.weixin.qq.com/miniprogram/dev/component/image.html | 组件/媒体组件/image}
      */
@@ -1666,10 +1744,12 @@ declare namespace wxml {
 
 declare global {
     namespace JSX {
-        interface InstrisicClassAttributes<T>
-            extends wxml.InstrisicClassAttributes<T> {}
+        interface ElementClass {}
 
-        interface InstrisicAttributes extends wxml.Attributes {}
+        interface IntrinsicClassAttributes<T>
+            extends wxml.IntrinsicClassAttributes<T> {}
+
+        interface IntrinsicAttributes extends wxml.IntrinsicAttributes {}
 
         interface IntrinsicElements {
             block: wxml.BlockElement;
@@ -1729,6 +1809,8 @@ declare global {
             navigator: wxml.NavigatorElement;
 
             "functional-page-navigator": wxml.FunctionalPageNavigatorElement;
+
+            audio: wxml.AudioElement;
 
             image: wxml.ImageElement;
         }
