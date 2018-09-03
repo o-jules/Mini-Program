@@ -1,6 +1,7 @@
 {
-  "name": "types-wxml",
+  "name": "@types/wxml",
   "version": "0.0.1",
+  "deprecated": false,
   "description": "Typescript JSX type definition for Wechat Mini Program WXML",
   "main": "index.d.ts",
   "scripts": {
@@ -17,6 +18,7 @@
   ],
   "author": "Huang Jules",
   "license": "GPL",
+  "types": "index.d.ts",
   "bugs": {
     "url": "https://github.com/o-jules/types-wxml/issues"
   },
