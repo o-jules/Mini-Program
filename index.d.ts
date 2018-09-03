@@ -506,7 +506,7 @@ declare namespace wxml {
      * 富文本。
      * 基础库 1.4.0 开始支持，低版本需做兼容处理。
      */
-    interface RichTextElement {
+    interface RichTextElement extends Element {
         /**
          * 节点列表 / HTML String。
          * nodes 属性推荐使用 Array 类型，由于组件会将 String 类型转换为 Array 类型，因而性能会有所下降
@@ -519,7 +519,7 @@ declare namespace wxml {
     /**
      * 进度条。
      */
-    interface ProgressElement {
+    interface ProgressElement extends Element {
         /**
          * 百分比 0~100
          */
@@ -753,7 +753,7 @@ declare namespace wxml {
      * 表单，将组件内的用户输入的<switch/> <input/> <checkbox/> <slider/> <radio/> <picker/> 提交。
      * 当点击 <form/> 表单中 formType 为 submit 的 <button/> 组件时，会将表单组件中的 value 值进行提交，需要在表单组件中加上 name 来作为 key。
      */
-    interface FormElement {
+    interface FormElement extends Element {
         /**
          * 是否返回 formId 用于发送模板消息。
          */
@@ -773,7 +773,7 @@ declare namespace wxml {
     /**
      * 输入框。该组件是[原生组件](https://developers.weixin.qq.com/miniprogram/dev/component/native-component.html)，使用时请注意相关限制。
      */
-    interface InputElement {
+    interface InputElement extends Element {
         /**
          * 输入框的初始内容。
          */
@@ -904,7 +904,7 @@ declare namespace wxml {
      * for优先级高于内部控件，内部有多个控件的时候默认触发第一个控件。
      * 目前可以绑定的控件有：<button/>, <checkbox/>, <radio/>, <switch/>。
      */
-    interface LabelElement {
+    interface LabelElement extends Element {
         /**
          * 绑定控件的 id
          */
@@ -914,7 +914,7 @@ declare namespace wxml {
     /**
      * 普通选择器
      */
-    interface PickerSelector {
+    interface PickerSelector extends Element {
         mode: "selector";
 
         /**
@@ -956,7 +956,7 @@ declare namespace wxml {
      * 多列选择器（最低版本：1.4.0）
      * @since 1.4.0
      */
-    interface PickerMultiSelector {
+    interface PickerMultiSelector extends Element {
         mode: "multiSelector";
 
         /**
@@ -1001,7 +1001,7 @@ declare namespace wxml {
     /**
      * 时间选择器
      */
-    interface PickerTime {
+    interface PickerTime extends Element {
         mode: "time";
 
         /**
@@ -1039,7 +1039,7 @@ declare namespace wxml {
     /**
      * 日期选择器
      */
-    interface PickerDate {
+    interface PickerDate extends Element {
         mode: "date";
 
         /**
@@ -1089,7 +1089,7 @@ declare namespace wxml {
      * 省市区选择器（最低版本：1.4.0）
      * @since 1.4.0
      */
-    interface PickerRegion {
+    interface PickerRegion extends Element {
         mode: "region";
 
         /**
@@ -1114,7 +1114,7 @@ declare namespace wxml {
          * @since 1.9.90
          */
         bindcancel?: EventHandle;
-    
+
         /**
          * 是否禁用。
          * 默认值：false
@@ -1131,6 +1131,49 @@ declare namespace wxml {
         | PickerTime
         | PickerDate
         | PickerRegion;
+
+    /**
+     * 嵌入页面的滚动选择器
+     */
+    interface PickerViewElement extends Element {
+        /**
+         * 数组中的数字依次表示 picker-view 内的 picker-view-column 选择的第几项（下标从 0 开始），数字大于 picker-view-column 可选项长度时，选择最后一项。
+         */
+        value?: Array<number>;
+
+        /**
+         * 设置选择器中间选中框的样式
+         */
+        indicatorStyle?: string;
+
+        /**
+         * 设置选择器中间选中框的类名
+         * @since 1.1.0
+         */
+        indicatorClass?: string;
+
+        /**
+         * 设置蒙层的样式
+         * @since 1.5.0
+         */
+        maskStyle?: string;
+
+        /**
+         * 设置蒙层的类名
+         * @since 1.5.0
+         */
+        maskClass?: string;
+
+        /**
+         * 当滚动选择，value 改变时触发 change 事件，event.detail = {value: value}；value为数组，表示 picker-view 内的 picker-view-column 当前选择的是第几项（下标从 0 开始）
+         */
+        bindchange?: EventHandle;
+    }
+
+    /**
+     * 仅可放置于<picker-view />中，其孩子节点的高度会自动设置成与picker-view的选中框的高度一致。
+     */
+    interface PickerViewColumnElement extends Element {}
 
     /**
      * 图片。
@@ -1243,6 +1286,10 @@ declare global {
             label: wxml.LabelElement;
 
             picker: wxml.PickerElement;
+
+            "picker-view": wxml.PickerViewElement;
+
+            "picker-view-column": wxml.PickerViewColumnElement;
 
             image: wxml.ImageElement;
         }
