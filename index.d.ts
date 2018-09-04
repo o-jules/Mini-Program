@@ -2772,7 +2772,7 @@ declare namespace wxml {
     interface OpenDataElement {
         /**
          * 开放数据类型。
-         * 
+         *
          * - groupName: 拉取群名称；最低版本 1.4.0
          * - userNickName: 用户昵称；最低版本 1.9.90
          * - userAvatarUrl: 用户头像；最低版本 1.9.90
@@ -2782,7 +2782,15 @@ declare namespace wxml {
          * - userCountry: 用户所在国家；最低版本 1.9.90
          * - userLanguage: 用户的语言；最低版本 1.9.90
          */
-        type: "groupName" | "userNickName" | "userAvatarUrl" | "userGender" | "userCity" | "userProvince" | "userCountry" | "userLanguage";
+        type:
+            | "groupName"
+            | "userNickName"
+            | "userAvatarUrl"
+            | "userGender"
+            | "userCity"
+            | "userProvince"
+            | "userCountry"
+            | "userLanguage";
 
         /**
          * 当 type="groupName" 时生效, 群id。
@@ -2794,6 +2802,77 @@ declare namespace wxml {
          * 默认值：en
          */
         lang?: string;
+    }
+
+    /**
+     * 基础库 1.6.4 开始支持，低版本需做兼容处理。
+     * web-view 组件是一个可以用来承载网页的容器，会自动铺满整个小程序页面。个人类型与海外类型的小程序暂不支持使用。
+     * 客户端 6.7.2 版本开始，navigationStyle: custom 对 <web-view> 组件无效。
+     *
+     * ## 相关接口 1
+     * <web-view/>网页中可使用JSSDK 1.3.2提供的接口返回小程序页面。 支持的接口有：
+     *
+     * | 接口名  | 说明 | 最低版本 |
+     * |--------|-----|---------|
+     * | wx.miniProgram.navigateTo    | 参数与小程序接口一致 | 1.6.4 |
+     * | wx.miniProgram.navigateBack  | 参数与小程序接口一致 | 1.6.4 |
+     * | wx.miniProgram.switchTab     | 参数与小程序接口一致 | 1.6.5 |
+     * | wx.miniProgram.reLaunch      | 参数与小程序接口一致 | 1.6.5 |
+     * | wx.miniProgram.redirectTo    | 参数与小程序接口一致 | 1.6.5 |
+     * | wx.miniProgram.postMessage   | 向小程序发送消息    | 1.7.1 |
+     * | wx.miniProgram.getEnv        | 获取当前环境        | 1.7.1 |
+     *
+     * ## 相关接口 2
+     * <web-view/>网页中仅支持以下JSSDK接口：
+     * 
+     * | 接口模块  | 接口说明 | 具体接口 |
+     * |----------|--------|---------|
+     * | 判断客户端是否支持js  |  | checkJSApi |
+     * | 图像接口    | 拍照或上传 | chooseImage |
+     * |           | 预览图片  | previewImage |
+     * |           | 上传图片  | uploadImage |
+     * |           | 下载图片  | downloadImage |
+     * |           | 获取本地图片  | getLocalImgData |
+     * | 音频接口   | 开始录音 | startRecord |
+     * |           | 停止录音  | stopRecord |
+     * |           | 监听录音自动停止  | onVoiceRecordEnd |
+     * |           | 播放语音  | playVoice |
+     * |           | 暂停播放  | pauseVoice |
+     * |           | 停止播放  | stopVoice |
+     * |           | 监听语音播放完毕  | onVoicePlayEnd |
+     * |           | 上传接口  | uploadVoice |
+     * |           | 下载接口  | downloadVoice |
+     * | 智能接口   | 识别音频 | translateVoice |
+     * | 设备信息   | 获取网络状态 | getNetworkType |
+     * | 地理位置   | 使用内置地图 | getLocation |
+     * |           | 获取地理位置  | openLocation |
+     * | 摇一摇周边  | 开启ibeacon | startSearchBeacons |
+     * |           | 关闭ibeacon  | stopSearchBeacons |
+     * |           | 监听ibeacon  | onSearchBeacons |
+     * | 微信扫一扫  | 调起微信扫一扫 | scanQRCode |
+     * | 微信卡券   | 拉取使用卡券列表 | chooseCard |
+     * |           | 批量添加卡券接口  | addCard |
+     * |           | 查看微信卡包的卡券  | openCard |
+     * | 长按识别   | 小程序圆形码        | 无 |
+     * 
+     * ## 相关接口 3
+     * 
+     * 用户分享时可获取当前<web-view/>的URL，即在onShareAppMessage回调中返回webViewUrl参数。
+     * 
+     * ## 相关接口 4
+     * 
+     * 在网页内可通过window.__wxjs_environment变量判断是否在小程序环境，建议在WeixinJSBridgeReady回调中使用，也可以使用JSSDK 1.3.2提供的getEnv接口。
+     */
+    interface WebViewElement {
+        /**
+         * webview 指向网页的链接。可打开关联的公众号的文章，其它网页需登录小程序管理后台配置业务域名。
+         */
+        src?: string;
+
+        /**
+         * 网页向小程序 postMessage 时，会在特定时机（小程序后退、组件销毁、分享）触发并收到消息。e.detail = { data }
+         */
+        bindmessage?: EventHandle;
     }
 }
 
@@ -2882,6 +2961,8 @@ declare global {
             canvas: wxml.CanvasElement;
 
             "open-data": wxml.OpenDataElement;
+
+            "web-view": wxml.WebViewElement;
         }
     }
 }
