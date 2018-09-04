@@ -2824,7 +2824,7 @@ declare namespace wxml {
      *
      * ## 相关接口 2
      * <web-view/>网页中仅支持以下JSSDK接口：
-     * 
+     *
      * | 接口模块  | 接口说明 | 具体接口 |
      * |----------|--------|---------|
      * | 判断客户端是否支持js  |  | checkJSApi |
@@ -2854,13 +2854,13 @@ declare namespace wxml {
      * |           | 批量添加卡券接口  | addCard |
      * |           | 查看微信卡包的卡券  | openCard |
      * | 长按识别   | 小程序圆形码        | 无 |
-     * 
+     *
      * ## 相关接口 3
-     * 
+     *
      * 用户分享时可获取当前<web-view/>的URL，即在onShareAppMessage回调中返回webViewUrl参数。
-     * 
+     *
      * ## 相关接口 4
-     * 
+     *
      * 在网页内可通过window.__wxjs_environment变量判断是否在小程序环境，建议在WeixinJSBridgeReady回调中使用，也可以使用JSSDK 1.3.2提供的getEnv接口。
      */
     interface WebViewElement {
@@ -2873,6 +2873,31 @@ declare namespace wxml {
          * 网页向小程序 postMessage 时，会在特定时机（小程序后退、组件销毁、分享）触发并收到消息。e.detail = { data }
          */
         bindmessage?: EventHandle;
+    }
+
+    /**
+     * 广告。目前暂时以邀请制开放申请，请留意后续模板消息的通知。
+     * 基础库 1.9.94 开始支持，低版本需做兼容处理。
+     * @since 1.9.94
+     */
+    interface AdElement {
+        /**
+         * 广告单元id，可在小程序管理后台的流量主模块新建。
+         */
+        unitId?: string;
+
+        /**
+         * 广告加载成功的回调
+         * @since 2.2.1
+         */
+
+        bindload?: EventHandle;
+
+        /**
+         * 当广告发生错误时，触发的事件，可以通过该事件获取错误码及原因，事件对象event.detail = {errCode: 1002}
+         * @since 2.2.1
+         */
+        binderror?: EventHandle;
     }
 }
 
@@ -2963,6 +2988,8 @@ declare global {
             "open-data": wxml.OpenDataElement;
 
             "web-view": wxml.WebViewElement;
+
+            ad: wxml.AdElement;
         }
     }
 }
