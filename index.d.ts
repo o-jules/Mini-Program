@@ -952,12 +952,12 @@ declare namespace wxml {
          * mode为 selector 或 multiSelector 时，range 有效。
          * 默认值：[]
          */
-        range: Array<string>; // Array / Object Array;
+        range?: Array<string>; // Array / Object Array;
 
         /**
          * 当 range 是一个 Object Array 时，通过 range-key 来指定 Object 中 key 的值作为选择器显示内容
          */
-        rangeKey: string;
+        rangeKey?: string;
 
         /**
          * value 的值表示选择了 range 中的第几个（下标从 0 开始）
@@ -968,7 +968,7 @@ declare namespace wxml {
         /**
          * value 改变时触发 change 事件，event.detail = {value: value}
          */
-        bindchange: EventHandle;
+        bindchange?: EventHandle<{ value: number }>;
 
         /**
          * 是否禁用
@@ -980,7 +980,7 @@ declare namespace wxml {
          * 取消选择或点遮罩层收起 picker 时触发
          * @since 1.9.90
          */
-        bindcancel: EventHandle;
+        bindcancel?: EventHandle;
     }
 
     /**
@@ -1009,12 +1009,12 @@ declare namespace wxml {
         /**
          * value 改变时触发 change 事件，event.detail = {value: value}。
          */
-        bindchange?: EventHandle;
+        bindchange?: EventHandle<{ value: number }>;
 
         /**
          * 某一列的值改变时触发 columnchange 事件，event.detail = {column: column, value: value}，column 的值表示改变了第几列（下标从0开始），value 的值表示变更值的下标。
          */
-        bindcolumnchange?: EventHandle;
+        bindcolumnchange?: EventHandle<{ column: number; value: number }>;
 
         /**
          * 取消选择时触发。
@@ -1053,13 +1053,14 @@ declare namespace wxml {
         /**
          * value 改变时触发 change 事件，event.detail = {value: value}。
          */
-        bindchange?: EventHandle;
+        bindchange?: EventHandle<{ value: number }>;
 
         /**
          * 取消选择时触发。
          * @since 1.9.90
          */
         bindcancel?: EventHandle;
+
         /**
          * 是否禁用。
          * 默认值：false
@@ -1101,7 +1102,7 @@ declare namespace wxml {
         /**
          * value 改变时触发 change 事件，event.detail = {value: value}
          */
-        bindchange?: EventHandle;
+        bindchange?: EventHandle<{ value: number }>;
 
         /**
          * 取消选择时触发
@@ -1138,7 +1139,7 @@ declare namespace wxml {
         /**
          * value 改变时触发 change 事件，event.detail = {value: value, code: code, postcode: postcode}，其中字段code是统计用区划代码，postcode是邮政编码
          */
-        bindchange?: EventHandle;
+        bindchange?: EventHandle<{ value: number, code: string, postcode: string }>;
 
         /**
          * 取消选择时触发
@@ -1198,7 +1199,7 @@ declare namespace wxml {
         /**
          * 当滚动选择，value 改变时触发 change 事件，event.detail = {value: value}；value为数组，表示 picker-view 内的 picker-view-column 当前选择的是第几项（下标从 0 开始）
          */
-        bindchange?: EventHandle;
+        bindchange?: EventHandle<{ value: number }>;
     }
 
     /**
