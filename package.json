@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/o-jules/types-wxml/issues"
   },
-  "homepage": "https://github.com/o-jules/types-wxml#README"
+  "homepage": "https://github.com/o-jules/types-wxml#README",
+  "dependencies": {
+    "csstype": "^2.5.6"
+  }
 }

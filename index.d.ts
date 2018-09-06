@@ -1,5 +1,7 @@
 /// <reference path="types.d.ts" />
 
+import * as CSS from 'csstype';
+
 export = wxml;
 export as namespace wxml;
 
@@ -11,13 +13,15 @@ declare namespace wxml {
 
     interface IntrinsicAttributes {
         key?: string | number;
-        class?: string;
-        id?: string;
     }
 
     interface IntrinsicClassAttributes<T> {}
 
-    interface Element {}
+    interface Element {
+        class?: string;
+        id?: string;
+        style?: CSS.Properties<string | number>;
+    }
 
     interface Event<D = {}> {
         type: string;
