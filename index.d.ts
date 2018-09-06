@@ -1,11 +1,9 @@
+/// <reference path="types.d.ts" />
+
 export = wxml;
 export as namespace wxml;
 
 declare namespace wxml {
-    /**
-     * 颜色
-     */
-    type Color = string;
 
     /**
      * 版本
@@ -23,7 +21,19 @@ declare namespace wxml {
         id?: string;
     }
 
-    interface EventHandle {}
+    interface Event<D = {}> {
+        type: string;
+        timeStamp: number;
+        currentTarget: {
+            dataset: { [key in string]: any };
+        } & any;
+        target: any;
+        detail: D;
+    }
+
+    interface EventHandle<D = {}> {
+        (event: Event<D>): void;
+    }
 
     interface BlockElement {}
 
@@ -125,7 +135,14 @@ declare namespace wxml {
         /**
          * 滚动时触发，event.detail = {scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY}
          */
-        bindscroll?: EventHandle;
+        bindscroll?: EventHandle<{
+            scrollLeft: number;
+            scrollTop: number;
+            scrollHeight: number;
+            scrollWidth: number;
+            deltaX: number;
+            deltaY: number;
+        }>;
     }
 
     /**
