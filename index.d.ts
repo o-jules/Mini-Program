@@ -4,7 +4,6 @@ export = wxml;
 export as namespace wxml;
 
 declare namespace wxml {
-
     /**
      * 版本
      */
@@ -12,14 +11,13 @@ declare namespace wxml {
 
     interface IntrinsicAttributes {
         key?: string | number;
+        class?: string;
+        id?: string;
     }
 
     interface IntrinsicClassAttributes<T> {}
 
-    interface Element {
-        class?: string;
-        id?: string;
-    }
+    interface Element {}
 
     interface Event<D = {}> {
         type: string;
