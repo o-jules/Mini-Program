@@ -1,5 +1,5 @@
 App({
-  onLaunch: function () {
+  onLaunch() {
     // 登录
     wx.login({
       success: res => {

@@ -50,18 +50,25 @@ Component({
       })
     }
   },
+
   /**
    * 组件的方法列表
    */
   methods: {
-    getUserInfo: function(e) {
-      console.log(e)
+    getUserInfo(e) {
       const userInfo = e.detail.userInfo
       app.globalData.userInfo = userInfo
       this.setData({
         userInfo: userInfo,
         hasUserInfo: true
       })
+    },
+    onTapAvatar() {
+      const detail = {
+        url: this.data.userInfo.avatarUrl
+      }
+      const option = {}
+      this.triggerEvent('tapAvatar', detail, option)
     }
   }
 })
