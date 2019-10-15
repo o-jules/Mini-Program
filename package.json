@@ -1,0 +1,11 @@
+{
+    "author": {
+        "name": "o-jules",
+        "email": "jules3in@gmail.com"
+    },
+    "name": "@types/wepy",
+    "deprecated": false,
+    "description": "Wepy 框架的 TypeScript 定义文件",
+    "types": "index.d.ts",
+    "version": "0.0.1"
+}
