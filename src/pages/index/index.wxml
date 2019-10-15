@@ -1,0 +1,3 @@
+<view class="page page-index">
+  <user-info bind:tapAvatar="tapAvatar" />
+</view>

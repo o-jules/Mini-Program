@@ -1,0 +1,6 @@
+{
+  "navigationBarTitle": "背词",
+  "usingComponents": {
+    "user-info": "/components/user-info/index"
+  }
+}
